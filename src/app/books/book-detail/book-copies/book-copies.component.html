@@ -11,4 +11,9 @@
 			</mat-card-subtitle>
 		</mat-card>
 	</div>
+	<div *ngIf="book.copies!.length == 0">
+		<mat-card>
+			<mat-card-content> Keine Exemplare vorhanden </mat-card-content>
+		</mat-card>
+	</div>
 </div>
