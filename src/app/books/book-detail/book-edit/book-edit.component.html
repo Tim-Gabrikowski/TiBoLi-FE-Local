@@ -1,0 +1,23 @@
+<div *ngIf="book">
+	<h2>Edit {{ book.title }}</h2>
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label>Titel:</mat-label>
+			<input matInput value="{{ book.title }}" #title />
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Autor:</mat-label>
+			<input matInput value="{{ book.author }}" #author />
+		</mat-form-field>
+
+		<button
+			mat-fab
+			(click)="onSubmit(title.value, author.value)"
+			color="primary"
+			aria-label="Example icon button with a delete icon"
+		>
+			<mat-icon>save</mat-icon>
+		</button>
+	</div>
+</div>

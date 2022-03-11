@@ -1,0 +1,14 @@
+<div *ngIf="book">
+	<div *ngFor="let copy of book.copies">
+		<mat-card>
+			<mat-card-content>
+				<p>mNumber: {{ copy.mNumber }}</p>
+				<br />
+				<p>ANMERKUNGEN NOCH NICHT EINGEFÜGT.</p>
+			</mat-card-content>
+			<mat-card-subtitle>
+				<p>lifecycle: {{ copy.lifecycle }}</p>
+			</mat-card-subtitle>
+		</mat-card>
+	</div>
+</div>

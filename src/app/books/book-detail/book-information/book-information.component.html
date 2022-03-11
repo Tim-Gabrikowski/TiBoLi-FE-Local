@@ -1,0 +1,18 @@
+<div *ngIf="book">
+	<mat-card>
+		<mat-card-title>ID:</mat-card-title>
+		<mat-card-content>{{ book.id }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Title:</mat-card-title>
+		<mat-card-content>{{ book.title }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Autor:</mat-card-title>
+		<mat-card-content>{{ book.author }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Exemplare:</mat-card-title>
+		<mat-card-content>{{ book.copies!.length }}</mat-card-content>
+	</mat-card>
+</div>

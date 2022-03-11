@@ -1,0 +1,32 @@
+<!--Header-Toolbar-->
+<p>
+	<mat-toolbar color="primary">
+		<mat-toolbar-row>
+			<button mat-flat-button color="primary" routerLink="">
+				<mat-icon>home</mat-icon>
+			</button>
+			<span>{{ title }}</span>
+			<span class="example-spacer"></span>
+			<button
+				mat-icon-button
+				class="example-icon"
+				aria-label="Example icon-button with menu icon"
+			>
+				<mat-icon>books</mat-icon>
+			</button>
+		</mat-toolbar-row>
+	</mat-toolbar>
+</p>
+<!--Router bzw. content-->
+<router-outlet></router-outlet>
+
+<!--messages display-->
+<!-- <app-message></app-message> -->
+
+<!-- footer -->
+<!-- <p class="footer">
+	<mat-toolbar color="primary">
+		<mat-icon>copyright</mat-icon>
+		<span>{{ footerText }}</span>
+	</mat-toolbar>
+</p> -->

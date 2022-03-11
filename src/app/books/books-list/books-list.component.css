@@ -1,0 +1,21 @@
+.btn {
+	height: 100%;
+	width: 100%;
+}
+mat-action-list {
+	width: 75%;
+}
+h2 {
+	margin-left: 20px;
+}
+.font-a {
+	font-size: 20px;
+}
+.searchMenu {
+	margin-left: 20px;
+	margin-top: 10px;
+}
+app-book-list-item {
+	height: 100%;
+	width: 100%;
+}

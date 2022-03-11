@@ -1,0 +1,14 @@
+<div *ngIf="book" class="full">
+	<button
+		class="btn"
+		Mat-list-item
+		color="primary"
+		type="button"
+		(click)="onSelectBook(book)"
+	>
+		<span class="badge">{{ book.id }}</span>
+		<span class="name">{{ book.title }}</span>
+	</button>
+
+	<mat-divider></mat-divider>
+</div>

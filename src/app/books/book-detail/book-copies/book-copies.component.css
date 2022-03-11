@@ -1,0 +1,8 @@
+p {
+	margin-bottom: 0px;
+}
+mat-card {
+	width: 300px;
+	margin: 20px;
+	float: left;
+}
