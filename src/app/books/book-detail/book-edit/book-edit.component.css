@@ -11,3 +11,7 @@ h2 {
 	margin-left: 20px;
 	margin-bottom: 0px;
 }
+.space {
+	height: 0px;
+	width: 10px;
+}

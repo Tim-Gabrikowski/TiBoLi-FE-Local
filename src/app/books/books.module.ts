@@ -6,6 +6,7 @@ import { BookInformationComponent } from './book-detail/book-information/book-in
 import { BookCopiesComponent } from './book-detail/book-copies/book-copies.component';
 import { BookEditComponent } from './book-detail/book-edit/book-edit.component';
 import { BookListItemComponent } from './books-list/book-list-item/book-list-item.component';
+import { NewBookEditorComponent } from './books-list/new-book-editor/new-book-editor.component';
 //materials
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -18,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
 	declarations: [
@@ -27,6 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		BookCopiesComponent,
 		BookEditComponent,
 		BookListItemComponent,
+		NewBookEditorComponent,
 	],
 	imports: [
 		CommonModule,
@@ -42,6 +45,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		MatInputModule,
 		MatTooltipModule,
 		MatProgressBarModule,
+		MatStepperModule,
 	],
 	exports: [BooksListComponent, BookDetailComponent],
 })

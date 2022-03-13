@@ -1,0 +1,77 @@
+<mat-card>
+	<mat-card-title>Neues Buch anlegen</mat-card-title>
+	<mat-card-content>
+		<mat-stepper orientation="vertical" #stepper>
+			<!--Buchdetails-->
+			<mat-step>
+				<ng-template matStepLabel>Buchdetails angeben</ng-template>
+				<mat-form-field appearance="fill">
+					<mat-label>Titel:</mat-label>
+					<input matInput value="" #title />
+				</mat-form-field>
+				<br />
+				<mat-form-field appearance="fill">
+					<mat-label>Autor:</mat-label>
+					<input matInput value="" #author />
+				</mat-form-field>
+				<br />
+				<button
+					mat-button
+					matStepperNext
+					(click)="searchBooks(title.value)"
+				>
+					Next
+				</button>
+			</mat-step>
+			<!--checkForBook-->
+			<mat-step>
+				<ng-template matStepLabel>
+					Bestehendes Buch auswählen
+				</ng-template>
+				<div *ngIf="booksFound.length != 0">
+					<mat-list *ngFor="let book of booksFound">
+						<mat-list-item>
+							{{ book.title }} - {{ book.author }}
+							<button
+								mat-button
+								matStepperNext
+								(click)="createCopy(book.id)"
+							>
+								&gt;
+							</button>
+						</mat-list-item>
+					</mat-list>
+				</div>
+				<div>
+					<button
+						mat-button
+						matStepperNext
+						(click)="newBook(title.value, author.value)"
+					>
+						neu &gt;
+					</button>
+				</div>
+			</mat-step>
+			<!--Created Copy-->
+			<mat-step>
+				<ng-template matStepLabel> Akion beenden </ng-template>
+				<div *ngIf="newCopy">
+					Buchtitle: {{ title.value }}<br />
+					Autor: {{ author.value }} <br />
+					BuchId: {{ newCopy.bookId }}<br />
+					Exemplarnummer: {{ newCopy.mNumber }}<br />
+					<button
+						mat-button
+						matStepperNext
+						(click)="reloadBookList()"
+					>
+						Beenden
+					</button>
+				</div>
+				<div *ngIf="!newCopy">
+					<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+				</div>
+			</mat-step>
+		</mat-stepper>
+	</mat-card-content>
+</mat-card>

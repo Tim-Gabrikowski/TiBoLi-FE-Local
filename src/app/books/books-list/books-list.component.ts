@@ -21,6 +21,7 @@ export class BooksListComponent implements OnInit {
 
 	selectedBook?: IBook;
 	searched: boolean = false;
+	newEditor: boolean = false;
 
 	getBooks(): void {
 		this.bookService.getBooks().subscribe((books) => {
@@ -49,5 +50,9 @@ export class BooksListComponent implements OnInit {
 	}
 	backToHome() {
 		this.router.navigate(['']);
+	}
+
+	toggleNewEditor() {
+		this.newEditor = !this.newEditor;
 	}
 }

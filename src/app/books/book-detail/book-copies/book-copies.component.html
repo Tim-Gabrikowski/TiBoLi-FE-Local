@@ -4,16 +4,43 @@
 			<mat-card-content>
 				<p>mNumber: {{ copy.mNumber }}</p>
 				<br />
-				<p>ANMERKUNGEN NOCH NICHT EINGEFÜGT.</p>
+				<p>anm.</p>
 			</mat-card-content>
 			<mat-card-subtitle>
 				<p>lifecycle: {{ copy.lifecycle }}</p>
 			</mat-card-subtitle>
+			<mat-card-actions align="end">
+				<button
+					mat-mini-fab
+					color="accent"
+					aria-label="Example icon button with a plus one icon"
+					(click)="deleteCopy(copy.mNumber)"
+				>
+					<mat-icon matTooltip="Aus Ausleihe nehmen">
+						remove_circle_outline
+					</mat-icon>
+				</button>
+			</mat-card-actions>
 		</mat-card>
 	</div>
-	<div *ngIf="book.copies!.length == 0">
-		<mat-card>
-			<mat-card-content> Keine Exemplare vorhanden </mat-card-content>
-		</mat-card>
-	</div>
+	<mat-card>
+		<mat-card-subtitle *ngIf="book.copies!.length == 0">
+			Keine Exemplare vorhanden
+		</mat-card-subtitle>
+		<mat-card-content>
+			<button
+				mat-flat-button
+				color="accent"
+				(click)="createCopy()"
+				class="btn-full"
+			>
+				Exemplar hinzufügen
+			</button>
+		</mat-card-content>
+		<mat-card-footer>
+			<div *ngIf="newCopy">
+				<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+			</div>
+		</mat-card-footer>
+	</mat-card>
 </div>

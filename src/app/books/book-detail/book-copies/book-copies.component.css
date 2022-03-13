@@ -6,3 +6,6 @@ mat-card {
 	margin: 20px;
 	float: left;
 }
+.btn-full {
+	width: 100%;
+}

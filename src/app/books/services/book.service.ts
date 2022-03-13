@@ -12,6 +12,7 @@ import {
 	tap,
 } from 'rxjs/operators';
 import { IBook } from 'src/app/interfaces/book';
+import { ICopy } from 'src/app/interfaces/copy';
 import { MessageService } from 'src/app/message.service';
 
 @Injectable({
@@ -24,6 +25,7 @@ export class BookService {
 	) {}
 
 	private booksUrl = 'api/books';
+	private copiesUrl = 'api/copies';
 	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
@@ -81,6 +83,71 @@ export class BookService {
 			this.log('saved book');
 		});
 	}
+	newBook(
+		title: string | String,
+		author: string | String,
+		callback: Function
+	): void {
+		this.log('save book');
+		var req = this.http
+			.put(
+				this.booksUrl,
+				{ title: title, author: author },
+				this.httpOptions
+			)
+			.pipe(
+				this.delayRetry(1000, 3),
+				tap((_) => this.log(`create Book`)),
+				catchError(this.handleError<any>('updateBook'))
+			);
+		req.subscribe((result) => {
+			callback(result.insertId);
+		});
+	}
+	createCopy(bookId: Number): Observable<ICopy> {
+		return this.http
+			.post<ICopy>(this.copiesUrl, { bookId: bookId }, this.httpOptions)
+			.pipe(
+				this.delayRetry(1000, 3),
+				catchError(this.handleError<ICopy>('create new copy'))
+			);
+	}
+	searchBookByTerm(term: string): Observable<IBook[]> {
+		return this.http
+			.get<IBook[]>(this.booksUrl + '/search/' + term)
+			.pipe(
+				this.delayRetry(1000, 3),
+				catchError(this.handleError<IBook[]>('get Books', []))
+			);
+	}
+	deleteCopy(mNumber: number | Number) {
+		var req = this.http
+			.put(
+				this.copiesUrl,
+				{ mNumber: mNumber, lifecycle: 5 },
+				this.httpOptions
+			)
+			.pipe(
+				this.delayRetry(1000, 3),
+				tap((_) => this.log(`delete Copy Book`)),
+				catchError(this.handleError<any>('deleteCopy'))
+			);
+		req.subscribe((result) => {
+			this.log('Exemplar gelöscht');
+		});
+	}
+	deleteBook(id: number | Number) {
+		var req = this.http.delete(this.booksUrl + '/' + id).pipe(
+			this.delayRetry(1000, 3),
+			tap((_) => this.log(`delete Book`)),
+			catchError(this.handleError<any>('deleteBook'))
+		);
+		req.subscribe((result) => {
+			this.log('Buch gelöscht');
+		});
+	}
+
+	//some magic to retry actions:
 	delayRetry(delayMS: number, maxRetry: number) {
 		let retries = maxRetry;
 		return (src: Observable<any>) =>

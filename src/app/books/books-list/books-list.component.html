@@ -44,3 +44,11 @@
 		<app-book-list-item [book]="book"></app-book-list-item>
 	</mat-list-item>
 </mat-action-list>
+<div id="newButton">
+	<button mat-fab color="primary" (click)="toggleNewEditor()">
+		<mat-icon>edit</mat-icon>
+	</button>
+</div>
+<div *ngIf="newEditor" id="newEditor">
+	<app-new-book-editor></app-new-book-editor>
+</div>

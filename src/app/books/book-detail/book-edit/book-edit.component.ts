@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IBook } from 'src/app/interfaces/book';
 import { FormGroup, FormControl } from '@angular/forms';
 import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-book-edit',
@@ -9,7 +10,7 @@ import { BookService } from '../../services/book.service';
 	styleUrls: ['./book-edit.component.css'],
 })
 export class BookEditComponent implements OnInit {
-	constructor(private bookService: BookService) {}
+	constructor(private bookService: BookService, private router: Router) {}
 	@Input() book?: IBook;
 
 	ngOnInit(): void {}
@@ -18,5 +19,9 @@ export class BookEditComponent implements OnInit {
 		this.book!.title = title;
 		this.book!.author = author;
 		this.bookService.updateBook(this.book!);
+	}
+	deleteBook() {
+		this.bookService.deleteBook(this.book!.id);
+		this.router.navigate(['/books']);
 	}
 }

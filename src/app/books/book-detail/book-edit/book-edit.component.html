@@ -10,7 +10,7 @@
 			<mat-label>Autor:</mat-label>
 			<input matInput value="{{ book.author }}" #author />
 		</mat-form-field>
-
+		<br />
 		<button
 			mat-fab
 			(click)="onSubmit(title.value, author.value)"
@@ -18,6 +18,15 @@
 			aria-label="Example icon button with a delete icon"
 		>
 			<mat-icon>save</mat-icon>
+		</button>
+		<br />
+		<br />
+		<button
+			mat-fab
+			(click)="deleteBook()"
+			aria-label="Example icon button with a delete icon"
+		>
+			<mat-icon>delete</mat-icon>
 		</button>
 	</div>
 </div>
