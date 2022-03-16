@@ -6,8 +6,9 @@
 	<mat-icon>arrow_back_ios</mat-icon>
 </button>
 <span *ngIf="book" class="font-a">{{ book.title }}</span>
-<mat-tab-group>
-	<mat-tab label="Overwiew">
+
+<mat-tab-group #tabGroup (selectedTabChange)="selectedTabChange($event)">
+	<mat-tab label="Overview">
 		<app-book-information [book]="book"></app-book-information>
 	</mat-tab>
 	<mat-tab label="Exemplare">

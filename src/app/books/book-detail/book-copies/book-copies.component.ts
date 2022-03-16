@@ -15,8 +15,11 @@ export class BookCopiesComponent implements OnInit {
 	ngOnInit(): void {}
 	createCopy() {
 		this.newCopy = true;
-		this.bookService.createCopy(this.book!.id).subscribe((copy) => {
-			this.book!.copies!.push(copy);
+		this.bookService.createCopies(this.book!.id, 1).subscribe((copies) => {
+			copies.forEach((element) => {
+				this.book!.copies!.push(element);
+			});
+
 			this.newCopy = false;
 		});
 	}

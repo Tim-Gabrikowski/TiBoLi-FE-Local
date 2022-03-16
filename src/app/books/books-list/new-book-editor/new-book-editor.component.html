@@ -18,24 +18,42 @@
 				<button
 					mat-button
 					matStepperNext
-					(click)="searchBooks(title.value)"
+					(click)="searchBooks(title.value, author.value)"
 				>
 					Next
 				</button>
 			</mat-step>
+
 			<!--checkForBook-->
 			<mat-step>
 				<ng-template matStepLabel>
 					Bestehendes Buch auswählen
 				</ng-template>
-				<div *ngIf="booksFound.length != 0">
-					<mat-list *ngFor="let book of booksFound">
+				<div *ngIf="booksFoundByTitle.length != 0">
+					<div>Bücher mit ähnlichem Titlel wie {{ title.value }}</div>
+					<mat-list *ngFor="let book of booksFoundByTitle">
 						<mat-list-item>
 							{{ book.title }} - {{ book.author }}
 							<button
 								mat-button
 								matStepperNext
-								(click)="createCopy(book.id)"
+								(click)="setNewBook(book.id)"
+							>
+								&gt;
+							</button>
+						</mat-list-item>
+					</mat-list>
+				</div>
+				<div *ngIf="booksFoundByAuthor.length != 0">
+					<div>Bücher mit ähnlichem Autor wie {{ author.value }}</div>
+					<mat-list *ngFor="let book of booksFoundByAuthor">
+						<mat-list-item>
+							{{ book.title }} - {{ book.author }}
+							<button
+								mat-button
+								matStepperNext
+								(click)="setNewBook(book.id)"
+								matTooltip="Neues Exemplar zu diesem Buch hinzufügen"
 							>
 								&gt;
 							</button>
@@ -47,30 +65,60 @@
 						mat-button
 						matStepperNext
 						(click)="newBook(title.value, author.value)"
+						matTooltip="Neues Exemplar anlegen. NUR, wenn das Buch KEINS der oben genannten ist!"
 					>
-						neu &gt;
+						neues Buch Anlegen &gt;
 					</button>
 				</div>
 			</mat-step>
+
 			<!--Created Copy-->
 			<mat-step>
-				<ng-template matStepLabel> Akion beenden </ng-template>
-				<div *ngIf="newCopy">
-					Buchtitle: {{ title.value }}<br />
-					Autor: {{ author.value }} <br />
-					BuchId: {{ newCopy.bookId }}<br />
-					Exemplarnummer: {{ newCopy.mNumber }}<br />
+				<ng-template matStepLabel> Exemplare hinzufügen </ng-template>
+				<div *ngIf="bookCreated">
+					<mat-form-field appearance="fill" floatLabel="always">
+						<mat-label>Anzahl</mat-label>
+						<input
+							matInput
+							type="number"
+							placeholder="1"
+							value="1"
+							#amount
+						/>
+					</mat-form-field>
 					<button
-						mat-button
+						mat-flat-button
 						matStepperNext
-						(click)="reloadBookList()"
+						(click)="newCopysToBook(newBookID, amount.value)"
 					>
-						Beenden
+						Exemplar(e) hinzufügen &gt;
+					</button>
+					<br />
+					<button mat-flat-button (click)="reloadBookList()">
+						Kein Exemplar hinzufügen
 					</button>
 				</div>
-				<div *ngIf="!newCopy">
+				<div *ngIf="!bookCreated">
 					<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 				</div>
+			</mat-step>
+
+			<!--new copy details-->
+			<mat-step>
+				<ng-template matStepLabel> Aktion Beenden </ng-template>
+				<div *ngIf="newCopys.length != 0">
+					<mat-list *ngFor="let copy of newCopys">
+						<mat-list-item>
+							Mediennummer: {{ copy.mNumber }}
+						</mat-list-item>
+					</mat-list>
+				</div>
+				<div *ngIf="newCopys.length == 0">
+					<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+				</div>
+				<button mat-flat-button (click)="reloadBookList()">
+					Beenden
+				</button>
 			</mat-step>
 		</mat-stepper>
 	</mat-card-content>

@@ -1,5 +1,4 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import {
@@ -26,6 +25,7 @@ export class BookService {
 
 	private booksUrl = 'api/books';
 	private copiesUrl = 'api/copies';
+
 	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
@@ -41,12 +41,12 @@ export class BookService {
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
 			console.error(error);
-			this.log('failed loading books: ' + error.message);
+			this.log('Bücher konnten nicht geladen werden ' + error.message);
 			return of(result as T);
 		};
 	}
 	getBooks(): Observable<IBook[]> {
-		this.log('start loading books');
+		this.log('Bücher werden geladen');
 
 		return this.http
 			.get<IBook[]>(this.booksUrl)
@@ -73,14 +73,14 @@ export class BookService {
 			);
 	}
 	updateBook(book: IBook): void {
-		this.log('save book');
+		this.log(' Buch wird gespeichert....');
 		var req = this.http.put(this.booksUrl, book, this.httpOptions).pipe(
 			this.delayRetry(1000, 3),
 			tap((_) => this.log(`updated book id=${book.id}`)),
 			catchError(this.handleError<any>('updateBook'))
 		);
 		req.subscribe((result) => {
-			this.log('saved book');
+			this.log('Buch gespeichert');
 		});
 	}
 	newBook(
@@ -88,7 +88,7 @@ export class BookService {
 		author: string | String,
 		callback: Function
 	): void {
-		this.log('save book');
+		this.log('Buch wird gespeichert...');
 		var req = this.http
 			.put(
 				this.booksUrl,
@@ -97,24 +97,37 @@ export class BookService {
 			)
 			.pipe(
 				this.delayRetry(1000, 3),
-				tap((_) => this.log(`create Book`)),
+				tap((_) => this.log(`Buch speichern`)),
 				catchError(this.handleError<any>('updateBook'))
 			);
 		req.subscribe((result) => {
 			callback(result.insertId);
+			this.log('Buch gespeichert');
 		});
 	}
-	createCopy(bookId: Number): Observable<ICopy> {
+	createCopies(bookId: Number, amount: Number | number): Observable<ICopy[]> {
 		return this.http
-			.post<ICopy>(this.copiesUrl, { bookId: bookId }, this.httpOptions)
+			.post<ICopy[]>(
+				this.copiesUrl,
+				{ bookId: bookId, amount: amount },
+				this.httpOptions
+			)
 			.pipe(
 				this.delayRetry(1000, 3),
-				catchError(this.handleError<ICopy>('create new copy'))
+				catchError(this.handleError<ICopy[]>('create new copy'))
 			);
 	}
-	searchBookByTerm(term: string): Observable<IBook[]> {
+	searchBookByTitle(term: string): Observable<IBook[]> {
 		return this.http
-			.get<IBook[]>(this.booksUrl + '/search/' + term)
+			.get<IBook[]>(this.booksUrl + '/search/title/' + term)
+			.pipe(
+				this.delayRetry(1000, 3),
+				catchError(this.handleError<IBook[]>('get Books', []))
+			);
+	}
+	searchBookByAuthor(term: string): Observable<IBook[]> {
+		return this.http
+			.get<IBook[]>(this.booksUrl + '/search/author/' + term)
 			.pipe(
 				this.delayRetry(1000, 3),
 				catchError(this.handleError<IBook[]>('get Books', []))
@@ -129,7 +142,7 @@ export class BookService {
 			)
 			.pipe(
 				this.delayRetry(1000, 3),
-				tap((_) => this.log(`delete Copy Book`)),
+				tap((_) => this.log(`Exemplar löschen...`)),
 				catchError(this.handleError<any>('deleteCopy'))
 			);
 		req.subscribe((result) => {
