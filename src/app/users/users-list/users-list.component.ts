@@ -17,6 +17,10 @@ export class UsersListComponent implements OnInit {
 	) {}
 
 	users: IUser[] = [];
+	filteredUsers: IUser[] = [];
+	searched: boolean = false;
+
+	newEditor: boolean = false;
 
 	ngOnInit(): void {
 		this.getBooks();
@@ -33,5 +37,20 @@ export class UsersListComponent implements OnInit {
 			this.users = users;
 			this.log('Nutzer geladen');
 		});
+	}
+	searchUser(term: string) {
+		this.filteredUsers = this.users.filter(
+			(user) =>
+				user.vorname.toLowerCase().includes(term.toLowerCase()) ||
+				user.nachname.toLowerCase().includes(term.toLowerCase())
+		);
+		this.searched = true;
+	}
+	undoSearch() {
+		this.filteredUsers = [];
+		this.searched = false;
+	}
+	toggleNewEditor() {
+		this.newEditor = !this.newEditor;
 	}
 }

@@ -1,10 +1,4 @@
-import {
-	Component,
-	OnInit,
-	Input,
-	ChangeDetectorRef,
-	ViewChild,
-} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { IBook } from 'src/app/interfaces/book';
 import { BookService } from '../services/book.service';
@@ -21,7 +15,6 @@ export class BookDetailComponent implements OnInit {
 		private bookService: BookService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private changeDetectorRef: ChangeDetectorRef,
 		private location: Location
 	) {
 		this.router.routeReuseStrategy.shouldReuseRoute = () => false;

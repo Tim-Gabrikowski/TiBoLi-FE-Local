@@ -29,7 +29,7 @@
 		<mat-icon>cancel</mat-icon>
 	</button>
 </div>
-<div *ngIf="!books">
+<div *ngIf="books.length == 0">
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <!--if not searched-->

@@ -17,6 +17,6 @@ export class UserListItemComponent implements OnInit {
 
 	onSelectUser(user: IUser) {
 		this.selectedUser = user;
-		this.router.navigate([`/users/${this.selectedUser.bNumber}`]);
+		this.router.navigate([`/users/${this.selectedUser.id}`]);
 	}
 }

@@ -1,0 +1,53 @@
+<div *ngIf="user">
+	<h2>Benutzer bearbeiten</h2>
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label>Vorname:</mat-label>
+			<input
+				matInput
+				value="{{ user.vorname }}"
+				placeholder="John"
+				#vorname
+			/>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Nachname:</mat-label>
+			<input
+				matInput
+				value="{{ user.nachname }}"
+				placeholder="Doe"
+				#nachname
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label>Klasse</mat-label>
+			<mat-select name="class" [value]="user.classId" #class>
+				<mat-option *ngFor="let class of classes" [value]="class.id">
+					{{ class.class }}{{ class.letter }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<br />
+		<button
+			mat-fab
+			(click)="onSubmit(vorname.value, nachname.value, class.value)"
+			color="primary"
+			class="button"
+			matTooltip="Änderung speichern"
+		>
+			<mat-icon>save</mat-icon>
+		</button>
+		<br />
+		<br />
+		<button
+			mat-fab
+			(click)="deleteUser()"
+			class="button"
+			matTooltip="Nutzer löschen (dies wird den Nutzer nicht umbringen)"
+			aria-label="Example icon button with a delete icon"
+		>
+			<mat-icon>delete</mat-icon>
+		</button>
+	</div>
+</div>

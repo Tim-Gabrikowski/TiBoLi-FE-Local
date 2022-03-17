@@ -1,6 +1,9 @@
+import { IClass } from './class';
+
 export interface IUser {
 	id: number;
-	bNumber: number;
 	vorname: string;
 	nachname: string;
+	classId: number;
+	class?: IClass;
 }
