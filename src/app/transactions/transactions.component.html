@@ -1,0 +1,41 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		routerLink="/home"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Leihverkehr</span>
+	<mat-divider></mat-divider>
+</div>
+<div class="content">
+	<mat-card>
+		<mat-card-title>Ausleihen</mat-card-title>
+		<mat-card-footer>
+			<nav>
+				<button
+					mat-flat-button
+					color="accent"
+					routerLink="/transactions/lent"
+				>
+					Öffnen
+				</button>
+			</nav>
+		</mat-card-footer>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Zurrückgeben</mat-card-title>
+		<mat-card-footer>
+			<nav>
+				<button
+					mat-flat-button
+					color="accent"
+					routerLink="/transactions/back"
+				>
+					Öffnen
+				</button>
+			</nav>
+		</mat-card-footer>
+	</mat-card>
+</div>

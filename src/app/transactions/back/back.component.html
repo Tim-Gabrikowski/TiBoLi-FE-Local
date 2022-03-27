@@ -1,0 +1,18 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		routerLink="/transactions"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Zurrückgeben</span>
+	<mat-divider></mat-divider>
+</div>
+
+<mat-form-field appearance="fill">
+	<mat-label>Mediennummer</mat-label>
+	<input matInput placeholder="z.b. 111111111" #mNumberInput />
+</mat-form-field>
+<br />
+<button mat-button (click)="back(mNumberInput.value)">Zurrückgeben</button>

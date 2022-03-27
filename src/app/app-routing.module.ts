@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+//Components
 import { BooksListComponent } from './books/books-list/books-list.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { HomeComponent } from './home/home.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { LentComponent } from './transactions/lent/lent.component';
+import { BackComponent } from './transactions/back/back.component';
 
 const routes: Routes = [
 	{ path: 'books', component: BooksListComponent },
@@ -14,6 +19,9 @@ const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
 	{ path: 'users', component: UsersListComponent },
 	{ path: 'users/:bNumber', component: UserDetailComponent },
+	{ path: 'transactions', component: TransactionsComponent },
+	{ path: 'transactions/lent', component: LentComponent },
+	{ path: 'transactions/back', component: BackComponent },
 ];
 
 @NgModule({

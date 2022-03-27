@@ -1,0 +1,51 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		routerLink="/transactions"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Ausleihen</span>
+	<mat-divider></mat-divider>
+</div>
+
+<mat-stepper>
+	<mat-step>
+		<ng-template matStepLabel>Benutzer auswählen</ng-template>
+		<mat-form-field appearance="fill">
+			<mat-label>Benutzernummer</mat-label>
+			<input matInput placeholder="z.b. 11111" #bNumberInput />
+		</mat-form-field>
+		<br />
+		<button
+			mat-button
+			matStepperNext
+			(click)="setUserNumber(bNumberInput.value)"
+		>
+			Next
+		</button>
+	</mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Bücher auswählen</ng-template>
+		<mat-form-field appearance="fill">
+			<mat-label>Mediennummer</mat-label>
+			<input matInput placeholder="z.b. 111111111" #mNumberInput />
+		</mat-form-field>
+		<button mat-button (click)="addBook(mNumberInput.value)">
+			Hinzufügen
+		</button>
+		<br />
+		<button mat-button matStepperNext>Next</button>
+	</mat-step>
+	<mat-step>
+		<ng-template matStepLabel>Angaben prüfen</ng-template>
+		User: {{ bNumber }} <br />
+		Books: <br />
+		<div *ngFor="let book of books">
+			{{ book.mNumber }} - {{ book.status | transactionStatus }}
+		</div>
+		<button mat-button (click)="newTransactions()">Ausleihen</button><br />
+		<button mat-button (click)="reload()">Beenden</button>
+	</mat-step>
+</mat-stepper>
