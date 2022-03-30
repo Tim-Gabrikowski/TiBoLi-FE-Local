@@ -4,6 +4,11 @@ import { IBook } from 'src/app/interfaces/book';
 import { MessageService } from 'src/app/message.service';
 import { BookService } from '../services/book.service';
 
+interface searchOption {
+	id: number;
+	description: string;
+}
+
 @Component({
 	selector: 'app-books-list',
 	templateUrl: './books-list.component.html',
@@ -23,6 +28,17 @@ export class BooksListComponent implements OnInit {
 	searched: boolean = false;
 	newEditor: boolean = false;
 
+	searchOptions: searchOption[] = [
+		{
+			id: 0,
+			description: 'Titel',
+		},
+		{
+			id: 1,
+			description: 'Autor',
+		},
+	];
+
 	getBooks(): void {
 		this.bookService.getBooks().subscribe((books) => {
 			this.books = books;
@@ -38,7 +54,7 @@ export class BooksListComponent implements OnInit {
 		this.selectedBook = book;
 		this.router.navigate([`/books/${this.selectedBook.id}`]);
 	}
-	searchBook(term: string) {
+	searchBook(term: string, object: string) {
 		this.filteredBooks = this.books.filter((book) =>
 			book.title.toLowerCase().includes(term.toLowerCase())
 		);

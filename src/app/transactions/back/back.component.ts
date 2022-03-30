@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransactionsService } from '../services/transactions.service';
 
 @Component({
@@ -7,13 +8,16 @@ import { TransactionsService } from '../services/transactions.service';
 	styleUrls: ['./back.component.css'],
 })
 export class BackComponent implements OnInit {
-	constructor(private transactionsService: TransactionsService) {}
+	constructor(
+		private transactionsService: TransactionsService,
+		private router: Router
+	) {}
 
 	ngOnInit(): void {}
 
 	back(mNumber: string) {
 		this.transactionsService.finnishTransaction(Number(mNumber), () => {
-			window.location.reload();
+			this.router.navigate(['/transactions/back']);
 		});
 	}
 }

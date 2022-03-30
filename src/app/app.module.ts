@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatePipe } from './pipes/date.pipe';
-import { FormatDatePipe } from './pipes/format-date.pipe';
+import { DatePipe } from './pipes/dateManagement/date.pipe';
+import { FormatDatePipe } from './pipes/dateManagement/format-date.pipe';
 //modules:
 import { BooksModule } from './books/books.module';
 import { UsersModule } from './users/users.module';
@@ -32,15 +32,17 @@ import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
 
 @NgModule({
 	declarations: [
+		//components:
 		AppComponent,
 		HomeComponent,
 		MessageComponent,
 		TransactionsComponent,
 		LentComponent,
 		BackComponent,
+		//pipes:
 		DatePipe,
 		FormatDatePipe,
-  TransactionStatusPipe,
+		TransactionStatusPipe,
 	],
 	imports: [
 		BrowserModule,

@@ -29,6 +29,9 @@ export class LentComponent implements OnInit {
 		this.books.push({ mNumber: Number(num), status: 5 });
 		this.mNumbers.push(Number(num));
 	}
+	removeBook(num: number) {
+		this.books = this.books.filter((book) => book.mNumber != num);
+	}
 	newTransactions() {
 		this.books.forEach((element) => {
 			element.status = 1;

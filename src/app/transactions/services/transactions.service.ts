@@ -71,7 +71,9 @@ export class TransactionsService {
 			);
 		req.subscribe((res) => {
 			if (res.status == 0) {
-				this.log('ok');
+				this.log(
+					'Buch ' + mNumber + ' ist jetzt nicht mehr ausgeliehen.'
+				);
 			}
 			callback();
 		});

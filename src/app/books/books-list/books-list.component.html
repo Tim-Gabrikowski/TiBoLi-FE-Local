@@ -10,13 +10,25 @@
 	<mat-divider></mat-divider>
 </div>
 <div class="searchMenu">
+	<!-- <mat-form-field appearance="fill">
+		<mat-label>Suchobjekt</mat-label>
+		<mat-select name="class" [value]="0" #searchObject>
+			<mat-option
+				*ngFor="let option of searchOptions"
+				[value]="option.id"
+			>
+				{{ option.description }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field> -->
+	<span> </span>
 	<mat-form-field appearance="fill">
 		<mat-label>Suchen</mat-label>
 		<input placeholder="z.B. Artemis" matInput #searchterm />
 	</mat-form-field>
 	<button
 		mat-icon-button
-		(click)="searchBook(searchterm.value)"
+		(click)="searchBook(searchterm.value, '0')"
 		matTooltip="Suchen"
 	>
 		<mat-icon>search</mat-icon>

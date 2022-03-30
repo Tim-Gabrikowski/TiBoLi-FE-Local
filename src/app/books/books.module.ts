@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 		MatTooltipModule,
 		MatProgressBarModule,
 		MatStepperModule,
+		MatSelectModule,
 	],
 	exports: [BooksListComponent, BookDetailComponent],
 })
