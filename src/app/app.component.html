@@ -7,12 +7,19 @@
 			</button>
 			<span>{{ title }}</span>
 			<span class="example-spacer"></span>
+			<button mat-icon-button class="example-icon" routerLink="books">
+				<mat-icon>book</mat-icon>
+			</button>
+			<button mat-icon-button class="example-icon" routerLink="users">
+				<mat-icon>group</mat-icon>
+			</button>
 			<button
 				mat-icon-button
 				class="example-icon"
-				aria-label="Example icon-button with menu icon"
+				routerLink="transactions"
 			>
-				<mat-icon>books</mat-icon>
+				<mat-icon>call_made</mat-icon>
+				<mat-icon>call_received</mat-icon>
 			</button>
 		</mat-toolbar-row>
 	</mat-toolbar>
