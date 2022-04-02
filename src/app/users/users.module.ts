@@ -6,6 +6,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserInformationComponent } from './user-detail/user-information/user-information.component';
 import { UserEditComponent } from './user-detail/user-edit/user-edit.component';
 import { UserNewEditorComponent } from './users-list/user-new-editor/user-new-editor.component';
+import { UserTransactionsComponent } from './user-detail/user-transactions/user-transactions.component';
+
 //Material:
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -20,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
 	declarations: [
@@ -29,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 		UserInformationComponent,
 		UserEditComponent,
 		UserNewEditorComponent,
+		UserTransactionsComponent,
 	],
 	imports: [
 		CommonModule,
@@ -46,6 +50,7 @@ import { MatSelectModule } from '@angular/material/select';
 		MatProgressBarModule,
 		MatStepperModule,
 		MatSelectModule,
+		MatTableModule,
 	],
 	exports: [UsersListComponent],
 })

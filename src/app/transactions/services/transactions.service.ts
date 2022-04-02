@@ -78,6 +78,19 @@ export class TransactionsService {
 			callback();
 		});
 	}
+	getTransactionsFromUser(num: number): Observable<ITransaction[]> {
+		return this.http
+			.get<ITransaction[]>(this.transactionsUrl + '/user/' + num)
+			.pipe(
+				this.delayRetry(1000, 3),
+				catchError(
+					this.handleError<ITransaction[]>(
+						'get Transations from User',
+						[]
+					)
+				)
+			);
+	}
 
 	//error Handling
 	private handleError<T>(operator = 'operator', result?: T) {

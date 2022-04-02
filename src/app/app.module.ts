@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from './pipes/dateManagement/date.pipe';
 import { FormatDatePipe } from './pipes/dateManagement/format-date.pipe';
+import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
 //modules:
 import { BooksModule } from './books/books.module';
 import { UsersModule } from './users/users.module';
@@ -28,7 +29,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
 
 @NgModule({
 	declarations: [

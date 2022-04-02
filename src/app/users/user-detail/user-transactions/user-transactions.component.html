@@ -1,0 +1,34 @@
+<div *ngIf="!transactionsGot">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngIf="transactionsGot">
+	<table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+		<!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<th mat-header-cell *matHeaderCellDef>Mediennummer</th>
+			<td mat-cell *matCellDef="let element">{{ element.mNumber }}</td>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef>Ausleihdatum</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.lentDate | date }}
+			</td>
+		</ng-container>
+
+		<!-- Weight Column -->
+		<ng-container matColumnDef="weight">
+			<th mat-header-cell *matHeaderCellDef>Rückgabedatum</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.backDate | date }}
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+</div>
