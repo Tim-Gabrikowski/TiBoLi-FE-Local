@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ITransaction } from 'src/app/interfaces/transaction';
+import { ITransactionBook } from 'src/app/interfaces/transactionBook';
 import { IUser } from 'src/app/interfaces/user';
 import { TransactionsService } from 'src/app/transactions/services/transactions.service';
 
@@ -11,10 +12,16 @@ import { TransactionsService } from 'src/app/transactions/services/transactions.
 export class UserTransactionsComponent implements OnInit {
 	constructor(private transactionService: TransactionsService) {}
 
-	@Input() transactions?: ITransaction[];
+	@Input() transactions?: ITransactionBook[];
 	transactionsGot: boolean = false;
 
-	displayedColumns: string[] = ['position', 'name', 'weight'];
+	displayedColumns: string[] = [
+		'title',
+		'author',
+		'mNumber',
+		'lentdate',
+		'backdate',
+	];
 
 	ngOnInit(): void {}
 }

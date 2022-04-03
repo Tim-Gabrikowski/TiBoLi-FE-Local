@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, mergeMap, retryWhen, tap } from 'rxjs/operators';
 import { ITransaction } from 'src/app/interfaces/transaction';
+import { ITransactionBook } from 'src/app/interfaces/transactionBook';
 import { MessageService } from 'src/app/message.service';
 
 @Injectable({
@@ -85,6 +86,23 @@ export class TransactionsService {
 				this.delayRetry(1000, 3),
 				catchError(
 					this.handleError<ITransaction[]>(
+						'get Transations from User',
+						[]
+					)
+				)
+			);
+	}
+	getTransactionsWithBookFromUser(
+		num: number
+	): Observable<ITransactionBook[]> {
+		return this.http
+			.get<ITransactionBook[]>(
+				this.transactionsUrl + '/user/' + num + '/books'
+			)
+			.pipe(
+				this.delayRetry(1000, 3),
+				catchError(
+					this.handleError<ITransactionBook[]>(
 						'get Transations from User',
 						[]
 					)

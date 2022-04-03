@@ -7,7 +7,7 @@ import { UserInformationComponent } from './user-detail/user-information/user-in
 import { UserEditComponent } from './user-detail/user-edit/user-edit.component';
 import { UserNewEditorComponent } from './users-list/user-new-editor/user-new-editor.component';
 import { UserTransactionsComponent } from './user-detail/user-transactions/user-transactions.component';
-
+import { PipesModuleModule } from '../pipes-module/pipes-module.module';
 //Material:
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -37,6 +37,7 @@ import { MatTableModule } from '@angular/material/table';
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
+		PipesModuleModule,
 		//Materials:
 		MatTabsModule,
 		MatCardModule,

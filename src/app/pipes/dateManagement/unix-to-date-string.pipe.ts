@@ -5,17 +5,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UnixToDateStringPipe implements PipeTransform {
 	transform(date: number, ...args: unknown[]): string {
+		if (date <= 100000000) return '';
+
 		var value = new Date(date);
 
-		var hours = value.getHours();
+		var hours = '0' + value.getHours();
 		var minutes = '0' + value.getMinutes();
 		var seconds = '0' + value.getSeconds();
 		var day = '0' + value.getDate();
-		var month = '0' + value.getMonth();
+		var month = '0' + (value.getMonth() + 1);
 		var year = value.getFullYear();
 
 		var formattedTime =
-			hours +
+			hours.substring(hours.length - 2) +
 			':' +
 			minutes.substring(minutes.length - 2) +
 			':' +

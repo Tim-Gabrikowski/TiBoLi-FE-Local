@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITransaction } from 'src/app/interfaces/transaction';
+import { ITransactionBook } from 'src/app/interfaces/transactionBook';
 import { IUser } from 'src/app/interfaces/user';
 import { TransactionsService } from 'src/app/transactions/services/transactions.service';
 import { UsersService } from '../services/users.service';
@@ -19,7 +20,7 @@ export class UserDetailComponent implements OnInit {
 	) {}
 
 	user?: IUser;
-	transactions: ITransaction[] = [];
+	transactions: ITransactionBook[] = [];
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
@@ -38,10 +39,9 @@ export class UserDetailComponent implements OnInit {
 	}
 	getTransactions(bNum: number) {
 		this.transactionService
-			.getTransactionsFromUser(bNum)
+			.getTransactionsWithBookFromUser(bNum)
 			.subscribe((result) => {
 				this.transactions = result;
-				this.transactions = this.transactions.reverse();
 			});
 	}
 }
