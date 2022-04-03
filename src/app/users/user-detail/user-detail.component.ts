@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ITransaction } from 'src/app/interfaces/transaction';
 import { IUser } from 'src/app/interfaces/user';
+import { TransactionsService } from 'src/app/transactions/services/transactions.service';
 import { UsersService } from '../services/users.service';
 
 @Component({
@@ -12,14 +14,17 @@ export class UserDetailComponent implements OnInit {
 	constructor(
 		private userService: UsersService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private transactionService: TransactionsService
 	) {}
 
 	user?: IUser;
+	transactions: ITransaction[] = [];
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
 			this.getUser(Number(params.bNumber));
+			this.getTransactions(Number(params.bNumber));
 		});
 	}
 
@@ -30,5 +35,13 @@ export class UserDetailComponent implements OnInit {
 	}
 	backToList() {
 		this.router.navigate(['/users']);
+	}
+	getTransactions(bNum: number) {
+		this.transactionService
+			.getTransactionsFromUser(bNum)
+			.subscribe((result) => {
+				this.transactions = result;
+				this.transactions = this.transactions.reverse();
+			});
 	}
 }

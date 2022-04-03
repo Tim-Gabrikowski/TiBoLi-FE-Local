@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-	name: 'date',
+	name: 'unixToDateString',
 })
-export class DatePipe implements PipeTransform {
+export class UnixToDateStringPipe implements PipeTransform {
 	transform(date: number, ...args: unknown[]): string {
 		var value = new Date(date);
 

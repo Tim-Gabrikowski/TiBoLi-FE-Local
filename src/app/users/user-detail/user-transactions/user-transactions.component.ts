@@ -11,29 +11,10 @@ import { TransactionsService } from 'src/app/transactions/services/transactions.
 export class UserTransactionsComponent implements OnInit {
 	constructor(private transactionService: TransactionsService) {}
 
-	@Input() user?: IUser;
-	transactions: ITransaction[] = [];
+	@Input() transactions?: ITransaction[];
 	transactionsGot: boolean = false;
 
 	displayedColumns: string[] = ['position', 'name', 'weight'];
 
-	ngOnInit(): void {
-		var interval = setInterval(() => {
-			// get elem
-			if (typeof this.user === undefined) return;
-			clearInterval(interval);
-
-			// the rest of the code
-			this.getTransactions(this.user!.id);
-		}, 10);
-	}
-	getTransactions(bNum: number) {
-		this.transactionService
-			.getTransactionsFromUser(bNum)
-			.subscribe((result) => {
-				this.transactions = result;
-				this.transactions = this.transactions.reverse();
-				this.transactionsGot = true;
-			});
-	}
+	ngOnInit(): void {}
 }

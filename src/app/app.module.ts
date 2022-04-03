@@ -29,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
+import { UnixToDateStringPipe } from './pipes/dateManagement/unix-to-date-string.pipe';
 
 @NgModule({
 	declarations: [
@@ -43,6 +44,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 		DatePipe,
 		FormatDatePipe,
 		TransactionStatusPipe,
+  UnixToDateStringPipe,
 	],
 	imports: [
 		BrowserModule,
