@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from './message.service';
+import { SettingsServiceService } from './settings-service.service';
 
 @Component({
 	selector: 'app-root',
@@ -10,9 +11,10 @@ export class AppComponent {
 	title = 'TiBoLi';
 	footerText = 'Tim Gabrikowski';
 
-	constructor(private messageService: MessageService) {}
-
-	password = 'TiBoLi';
+	constructor(
+		private messageService: MessageService,
+		private settingsService: SettingsServiceService
+	) {}
 
 	loggedIn: boolean = false;
 
@@ -25,11 +27,13 @@ export class AppComponent {
 	}
 
 	login(password: string) {
-		if (password == this.password) {
-			this.loggedIn = true;
-			localStorage.setItem('loggedIn', 'true');
-		} else {
-			this.messageService.add('FALSCH!');
-		}
+		this.settingsService.checkLogin(password, (status: number) => {
+			if (status == 1) {
+				this.loggedIn = true;
+				localStorage.setItem('loggedIn', 'true');
+			} else {
+				this.messageService.add('FALSCH!');
+			}
+		});
 	}
 }
