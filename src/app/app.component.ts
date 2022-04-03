@@ -17,6 +17,7 @@ export class AppComponent {
 	) {}
 
 	loggedIn: boolean = false;
+	hide = true;
 
 	OnInit() {
 		if (localStorage.getItem('loggedIn') == 'true') {
