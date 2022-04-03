@@ -24,8 +24,26 @@
 		</mat-toolbar-row>
 	</mat-toolbar>
 </p>
-<!--Router bzw. content-->
-<router-outlet></router-outlet>
+
+<div *ngIf="loggedIn">
+	<!--Router bzw. content-->
+	<router-outlet></router-outlet>
+</div>
+<div *ngIf="!loggedIn">
+	<mat-card id="login">
+		<mat-card-header>LOGIN FIRST!</mat-card-header>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Passwort</mat-label>
+				<input matInput #passwordInput />
+			</mat-form-field>
+			<br />
+			<button mat-button (click)="login(passwordInput.value)">
+				Login
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>
 
 <!--messages display-->
 <!-- <app-message></app-message> -->
