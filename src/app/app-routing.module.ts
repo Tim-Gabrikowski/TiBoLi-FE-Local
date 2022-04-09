@@ -20,7 +20,7 @@ const routes: Routes = [
 	{ path: 'users', component: UsersListComponent },
 	{ path: 'users/:bNumber', component: UserDetailComponent },
 	{ path: 'transactions', component: TransactionsComponent },
-	{ path: 'transactions/lent', component: LentComponent },
+	{ path: 'transactions/lent/:random', component: LentComponent },
 	{ path: 'transactions/back', component: BackComponent },
 ];
 
