@@ -20,11 +20,11 @@ export class AppComponent {
 	hide = true;
 
 	OnInit() {
-		if (localStorage.getItem('loggedIn') == 'true') {
-			this.loggedIn = true;
-		} else {
-			this.loggedIn = false;
-		}
+		// if (localStorage.getItem('loggedIn') == 'true') {
+		// 	this.loggedIn = true;
+		// } else {
+		// 	this.loggedIn = false;
+		// }
 	}
 
 	login(password: string) {

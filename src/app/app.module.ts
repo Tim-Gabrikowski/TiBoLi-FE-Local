@@ -11,6 +11,7 @@ import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
 import { BooksModule } from './books/books.module';
 import { UsersModule } from './users/users.module';
 import { AppRoutingModule } from './app-routing.module';
+import { MarkdownModule } from 'ngx-markdown';
 //components:
 import { MessageComponent } from './message/message.component';
 import { HomeComponent } from './home/home.component';
@@ -29,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MarkdownTestComponent } from './markdown-test/markdown-test.component';
 
 @NgModule({
 	declarations: [
@@ -39,6 +41,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 		TransactionsComponent,
 		LentComponent,
 		BackComponent,
+		MarkdownTestComponent,
 		//pipes:
 		DatePipe,
 		FormatDatePipe,
@@ -52,6 +55,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 		HttpClientModule,
 		FormsModule,
 		BrowserAnimationsModule,
+		MarkdownModule.forRoot(),
 
 		//materials:
 		MatToolbarModule,
