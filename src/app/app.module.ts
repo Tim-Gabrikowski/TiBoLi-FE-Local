@@ -19,6 +19,9 @@ import { AppComponent } from './app.component';
 import { LentComponent } from './transactions/lent/lent.component';
 import { BackComponent } from './transactions/back/back.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { MarkdownTestComponent } from './markdown-test/markdown-test.component';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { APIDocumentationComponent } from './documentation/api-documentation/api-documentation.component';
 //materials:
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MarkdownTestComponent } from './markdown-test/markdown-test.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
 	declarations: [
@@ -46,6 +50,8 @@ import { MarkdownTestComponent } from './markdown-test/markdown-test.component';
 		DatePipe,
 		FormatDatePipe,
 		TransactionStatusPipe,
+		DocumentationComponent,
+		APIDocumentationComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -68,6 +74,8 @@ import { MarkdownTestComponent } from './markdown-test/markdown-test.component';
 		MatInputModule,
 		ReactiveFormsModule,
 		MatStepperModule,
+		MatExpansionModule,
+		MatProgressBarModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

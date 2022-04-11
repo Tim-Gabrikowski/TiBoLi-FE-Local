@@ -1,0 +1,28 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		(click)="backToHome()"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Dokumentation</span>
+	<mat-divider></mat-divider>
+</div>
+
+<mat-card>
+	<mat-card-title>API Dokumentation</mat-card-title>
+	<mat-card-content>
+		<span> Dokumentation und Anleitung zur Nutzung der API </span>
+		<nav class="btn">
+			<button
+				mat-flat-button
+				color="accent"
+				routerLink="/documentation/api"
+			>
+				Öffnen
+			</button>
+		</nav>
+	</mat-card-content>
+	<mat-card-footer> </mat-card-footer>
+</mat-card>

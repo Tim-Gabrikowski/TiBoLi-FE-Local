@@ -1,0 +1,25 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		(click)="backToHome()"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Api-Dokumentation</span>
+	<mat-divider></mat-divider>
+</div>
+
+<div *ngIf="!chapters">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngIf="chapters">
+	<div *ngFor="let cpt of chapters">
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title> {{ cpt.title }} </mat-panel-title>
+			</mat-expansion-panel-header>
+			<app-markdown-display [id]="cpt.id"></app-markdown-display>
+		</mat-expansion-panel>
+	</div>
+</div>

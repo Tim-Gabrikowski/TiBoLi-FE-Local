@@ -10,6 +10,8 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { LentComponent } from './transactions/lent/lent.component';
 import { BackComponent } from './transactions/back/back.component';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { APIDocumentationComponent } from './documentation/api-documentation/api-documentation.component';
 
 const routes: Routes = [
 	{ path: 'books', component: BooksListComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
 	{ path: 'transactions', component: TransactionsComponent },
 	{ path: 'transactions/lent/:random', component: LentComponent },
 	{ path: 'transactions/back', component: BackComponent },
+	{ path: 'documentation', component: DocumentationComponent },
+	{ path: 'documentation/api', component: APIDocumentationComponent },
 ];
 
 @NgModule({
