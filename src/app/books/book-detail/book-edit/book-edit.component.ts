@@ -19,6 +19,7 @@ export class BookEditComponent implements OnInit {
 		this.book!.title = title;
 		this.book!.author = author;
 		this.bookService.updateBook(this.book!);
+		this.router.navigate(['/books/' + this.book!.id + '/overview']);
 	}
 	deleteBook() {
 		this.bookService.deleteBook(this.book!.id);

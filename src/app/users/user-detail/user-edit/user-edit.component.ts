@@ -30,7 +30,7 @@ export class UserEditComponent implements OnInit {
 		this.user!.nachname = nachname;
 		this.user!.classId = classId;
 		this.userService.editUser(this.user!);
-		window.location.reload();
+		this.router.navigate(['/users/' + this.user!.id + '/overview']);
 	}
 	deleteUser() {
 		this.userService.deleteUser(this.user!.id);

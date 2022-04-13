@@ -34,7 +34,6 @@ export class BookDetailComponent implements OnInit {
 
 			if (params.page) this.page = params.page;
 			var index = this.tabs.indexOf(this.page);
-			console.log(params.page, index);
 			this.pageIndex = index;
 		});
 	}
@@ -45,6 +44,7 @@ export class BookDetailComponent implements OnInit {
 
 		this.selectTab(this.pageIndex);
 	}, 10);
+
 	book?: IBook;
 
 	getBook(id: Number): void {
@@ -75,7 +75,6 @@ export class BookDetailComponent implements OnInit {
 		const tabGroup = this.tabGroup;
 		if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
 
-		console.log(index, tabGroup);
 		tabGroup.selectedIndex = index;
 	}
 	setPageUrl(index: number) {

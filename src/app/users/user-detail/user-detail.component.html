@@ -9,7 +9,7 @@
 	Details von {{ user.vorname }} {{ user.nachname }}
 </span>
 
-<mat-tab-group>
+<mat-tab-group #tabGroup (selectedTabChange)="selectedTabChange($event)">
 	<mat-tab label="Overview">
 		<app-user-information [user]="user"></app-user-information>
 	</mat-tab>
@@ -22,3 +22,7 @@
 		></app-user-transactions>
 	</mat-tab>
 </mat-tab-group>
+
+<div *ngIf="!user">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>

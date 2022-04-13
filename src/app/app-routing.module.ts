@@ -21,6 +21,7 @@ const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
 	{ path: 'users', component: UsersListComponent },
 	{ path: 'users/:bNumber', component: UserDetailComponent },
+	{ path: 'users/:bNumber/:page', component: UserDetailComponent },
 	{ path: 'transactions', component: TransactionsComponent },
 	{ path: 'transactions/lent/:random', component: LentComponent },
 	{ path: 'transactions/back', component: BackComponent },
