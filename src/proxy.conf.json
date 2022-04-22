@@ -4,5 +4,11 @@
 		"secure": false,
 		"logLevel": "debug",
 		"pathRewrite": { "^/api": "" }
+	},
+	"/pdf/*": {
+		"target": "http://localhost:3006",
+		"secure": false,
+		"logLevel": "debug",
+		"pathRewrite": { "^/pdf": "" }
 	}
 }

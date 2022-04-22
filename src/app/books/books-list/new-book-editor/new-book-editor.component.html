@@ -37,7 +37,9 @@
 							<button
 								mat-button
 								matStepperNext
-								(click)="setNewBook(book.id)"
+								(click)="
+									setNewBook(book.title, book.author, book.id)
+								"
 							>
 								&gt;
 							</button>
@@ -52,7 +54,9 @@
 							<button
 								mat-button
 								matStepperNext
-								(click)="setNewBook(book.id)"
+								(click)="
+									setNewBook(book.title, book.author, book.id)
+								"
 								matTooltip="Neues Exemplar zu diesem Buch hinzufügen"
 							>
 								&gt;
@@ -89,7 +93,7 @@
 					<button
 						mat-flat-button
 						matStepperNext
-						(click)="newCopysToBook(newBookID, amount.value)"
+						(click)="newCopysToBook(newBookID!, amount.value)"
 					>
 						Exemplar(e) hinzufügen &gt;
 					</button>
@@ -105,19 +109,51 @@
 
 			<!--new copy details-->
 			<mat-step>
-				<ng-template matStepLabel> Aktion Beenden </ng-template>
+				<ng-template matStepLabel> Exemplare ansehen </ng-template>
 				<div *ngIf="newCopys.length != 0">
-					<mat-list *ngFor="let copy of newCopys">
-						<mat-list-item>
-							Mediennummer: {{ copy.mNumber }}
-						</mat-list-item>
-					</mat-list>
+					<div>Neue Exemplare:</div>
+					<div *ngFor="let copy of newCopys">
+						<span>
+							{{ copy.mNumber }}
+						</span>
+					</div>
 				</div>
 				<div *ngIf="newCopys.length == 0">
 					<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 				</div>
+				<button mat-button matStepperNext>Weiter</button>
+			</mat-step>
+			<mat-step>
+				<ng-template matStepLabel> Etiketten </ng-template>
+				<div>
+					<mat-form-field appearance="fill">
+						<mat-label>Erste Etikette</mat-label>
+						<mat-select
+							name="start"
+							[(value)]="defaultLabelPosition"
+							#start
+						>
+							<mat-option
+								*ngFor="let position of labelPositions"
+								[value]="position.position"
+							>
+								{{ position.label }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div>
+					<button mat-flat-button (click)="getPdfOfBooks()">
+						Etiketten anfordern
+					</button>
+					<div *ngIf="loadLables">
+						<mat-progress-bar
+							mode="indeterminate"
+						></mat-progress-bar>
+					</div>
+				</div>
 				<button mat-flat-button (click)="reloadBookList()">
-					Beenden
+					überspringen
 				</button>
 			</mat-step>
 		</mat-stepper>

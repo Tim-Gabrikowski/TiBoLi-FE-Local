@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBook } from 'src/app/interfaces/book';
 import { ICopy } from 'src/app/interfaces/copy';
+import { PdfService } from 'src/app/pdf.service';
 import { BookService } from '../../services/book.service';
 
 @Component({
@@ -10,13 +11,22 @@ import { BookService } from '../../services/book.service';
 	styleUrls: ['./new-book-editor.component.css'],
 })
 export class NewBookEditorComponent implements OnInit {
-	constructor(private bookService: BookService, private router: Router) {}
+	constructor(
+		private bookService: BookService,
+		private router: Router,
+		private pdfService: PdfService
+	) {}
 
 	booksFoundByTitle: IBook[] = [];
 	booksFoundByAuthor: IBook[] = [];
 	newCopys: ICopy[] = [];
 	bookCreated: boolean = false;
-	newBookID: Number = 0;
+	newBookID?: Number;
+
+	newBookTitle?: string;
+	newBookAuthor?: string;
+
+	loadLables = false;
 
 	ngOnInit(): void {}
 
@@ -38,12 +48,17 @@ export class NewBookEditorComponent implements OnInit {
 	newBook(title: string, author: string) {
 		this.bookService.newBook(title, author, (id: Number) => {
 			this.bookCreated = true;
-			this.newBookID = id;
+			console.log(id);
+			this.setNewBook(title, author, id);
+			console.log(this.newBookID);
 		});
 	}
-	setNewBook(id: number | Number) {
+	setNewBook(title: string, author: string, id: number | Number) {
 		this.bookCreated = true;
-		this.newBookID = id;
+
+		this.newBookTitle! = title;
+		this.newBookAuthor! = author;
+		this.newBookID! = id;
 	}
 	newCopysToBook(bookID: Number | number, InAmount: string) {
 		var amount: number = Number(InAmount);
@@ -54,4 +69,35 @@ export class NewBookEditorComponent implements OnInit {
 	reloadBookList() {
 		this.router.navigate(['/books/' + this.newBookID]);
 	}
+	getPdfOfBooks() {
+		var body = {
+			startAt: 0,
+			books: [{}],
+		};
+
+		var books = [{}];
+		this.newCopys.forEach((element) => {
+			var book = {
+				title: this.newBookTitle!,
+				author: this.newBookAuthor!,
+				mNumber: element.mNumber,
+			};
+			books.push(book);
+		});
+
+		body.books = books;
+		body.books.shift();
+		console.log(body);
+		this.loadLables = true;
+		this.pdfService.downloadPDF(body, () => {
+			this.loadLables = false;
+		});
+	}
+	defaultLabelPosition = 0;
+	labelPositions = [
+		{
+			position: 0,
+			label: '1:1',
+		},
+	];
 }
