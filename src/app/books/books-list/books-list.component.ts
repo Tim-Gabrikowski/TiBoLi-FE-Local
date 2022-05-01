@@ -54,11 +54,21 @@ export class BooksListComponent implements OnInit {
 		this.selectedBook = book;
 		this.router.navigate([`/books/${this.selectedBook.id}`]);
 	}
-	searchBook(term: string, object: string) {
+	searchBook(term: string) {
 		this.filteredBooks = this.books.filter((book) =>
-			book.title.toLowerCase().includes(term.toLowerCase())
+			this.filter(book, term)
 		);
 		this.searched = true;
+	}
+	filter(book: IBook, term: string) {
+		var searchTitle = book.title.toLowerCase().replace(/ /g, '');
+		var searchAuthor = book.author.toLowerCase().replace(/ /g, '');
+		var searchTerm = term.toLowerCase().replace(/ /g, '');
+
+		return (
+			searchTitle.includes(searchTerm) ||
+			searchAuthor.includes(searchTerm)
+		);
 	}
 	undoSearch() {
 		this.filteredBooks = [];
