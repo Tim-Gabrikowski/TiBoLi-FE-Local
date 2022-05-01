@@ -1,12 +1,12 @@
 <div *ngIf="book">
 	<h2>{{ book.title }} bearbeiten</h2>
-	<div>
-		<mat-form-field appearance="fill">
+	<div id="inputContainer">
+		<mat-form-field appearance="fill" id="titleInput">
 			<mat-label>Titel:</mat-label>
 			<input matInput value="{{ book.title }}" #title />
 		</mat-form-field>
 
-		<mat-form-field appearance="fill">
+		<mat-form-field appearance="fill" id="authorInput">
 			<mat-label>Autor:</mat-label>
 			<input matInput value="{{ book.author }}" #author />
 		</mat-form-field>

@@ -20,3 +20,7 @@ h2 {
 	padding: 0px;
 	margin-left: 20px;
 }
+#titleInput,
+#authorInput {
+	width: 600px;
+}
