@@ -7,6 +7,7 @@ import { BookCopiesComponent } from './book-detail/book-copies/book-copies.compo
 import { BookEditComponent } from './book-detail/book-edit/book-edit.component';
 import { BookListItemComponent } from './books-list/book-list-item/book-list-item.component';
 import { NewBookEditorComponent } from './books-list/new-book-editor/new-book-editor.component';
+
 //materials
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { LifecyclePipeModule } from '../pipes/copies/lifecycle-pipe/lifecycle-pipe.module';
 
 @NgModule({
 	declarations: [
@@ -48,6 +50,7 @@ import { MatSelectModule } from '@angular/material/select';
 		MatProgressBarModule,
 		MatStepperModule,
 		MatSelectModule,
+		LifecyclePipeModule.forRoot(),
 	],
 	exports: [BooksListComponent, BookDetailComponent],
 })
