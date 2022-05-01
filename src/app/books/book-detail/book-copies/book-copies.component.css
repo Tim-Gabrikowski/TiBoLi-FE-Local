@@ -4,8 +4,19 @@ p {
 mat-card {
 	width: 300px;
 	margin: 20px;
+}
+.float {
 	float: left;
 }
 .btn-full {
 	width: 100%;
+}
+.cardActionButton {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+#printBox {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
 }
