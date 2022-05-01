@@ -143,7 +143,10 @@
 					</mat-form-field>
 				</div>
 				<div>
-					<button mat-flat-button (click)="getPdfOfBooks()">
+					<button
+						mat-flat-button
+						(click)="getPdfOfBooks(start.value)"
+					>
 						Etiketten anfordern
 					</button>
 					<div *ngIf="loadLables">
