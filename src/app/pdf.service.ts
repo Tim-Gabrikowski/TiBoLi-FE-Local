@@ -20,21 +20,23 @@ export class PdfService {
 		}),
 	};
 
-	pdfURL: string = 'pdf/pdf';
+	BookPdfURL: string = 'pdf/pdf/books';
 
-	downloadPDF(body: {}, callback: Function): any {
+	downloadBookPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
-		this.http.post(this.pdfURL, body, { responseType: 'blob' }).subscribe(
-			(response) => {
-				var blob = new Blob([response], { type: mediaType });
-				var fileURL = URL.createObjectURL(blob);
-				callback();
-				window.open(fileURL);
-			},
-			(e) => {
-				throwError(e);
-			}
-		);
+		this.http
+			.post(this.BookPdfURL, body, { responseType: 'blob' })
+			.subscribe(
+				(response) => {
+					var blob = new Blob([response], { type: mediaType });
+					var fileURL = URL.createObjectURL(blob);
+					callback();
+					window.open(fileURL);
+				},
+				(e) => {
+					throwError(e);
+				}
+			);
 	}
 	//error Handling
 	private handleError<T>(operator = 'operator', result?: T) {

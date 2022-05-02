@@ -89,7 +89,7 @@ export class NewBookEditorComponent implements OnInit {
 		body.books.shift();
 		console.log(body);
 		this.loadLables = true;
-		this.pdfService.downloadPDF(body, () => {
+		this.pdfService.downloadBookPDF(body, () => {
 			this.loadLables = false;
 		});
 	}
