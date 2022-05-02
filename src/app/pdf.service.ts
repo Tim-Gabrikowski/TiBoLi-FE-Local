@@ -38,6 +38,24 @@ export class PdfService {
 				}
 			);
 	}
+	UserPdfURL: string = 'pdf/pdf/users';
+
+	downloadUserPDF(body: {}, callback: Function): any {
+		var mediaType = 'application/pdf';
+		this.http
+			.post(this.UserPdfURL, body, { responseType: 'blob' })
+			.subscribe(
+				(response) => {
+					var blob = new Blob([response], { type: mediaType });
+					var fileURL = URL.createObjectURL(blob);
+					callback();
+					window.open(fileURL);
+				},
+				(e) => {
+					throwError(e);
+				}
+			);
+	}
 	//error Handling
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
