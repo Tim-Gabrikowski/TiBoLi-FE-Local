@@ -1,0 +1,45 @@
+<div *ngIf="!loggedIn">
+	<mat-card id="login">
+		<mat-card-header>In Konto einloggen</mat-card-header>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Benutzername</mat-label>
+				<input matInput #usernameInput />
+			</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Passwort</mat-label>
+				<input
+					matInput
+					[type]="hide ? 'password' : 'text'"
+					#passwordInput
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+			</mat-form-field>
+			<br />
+			<button
+				mat-button
+				(click)="login(usernameInput.value, passwordInput.value)"
+			>
+				Login
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>
+<div *ngIf="loggedIn">
+	<mat-card>
+		<mat-card-title>Eingeloggt</mat-card-title>
+		<mat-card-content>
+			<button mat-button (click)="logout()">Logout</button>
+		</mat-card-content>
+	</mat-card>
+</div>

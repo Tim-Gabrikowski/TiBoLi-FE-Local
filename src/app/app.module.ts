@@ -35,6 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { authInterceptorProviders } from './auth/auth.interceptor';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
 	declarations: [
@@ -52,6 +54,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		TransactionStatusPipe,
 		DocumentationComponent,
 		APIDocumentationComponent,
+  LoginComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -77,7 +80,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		MatExpansionModule,
 		MatProgressBarModule,
 	],
-	providers: [],
+	providers: [authInterceptorProviders],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

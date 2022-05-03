@@ -21,45 +21,23 @@
 				<mat-icon>call_made</mat-icon>
 				<mat-icon>call_received</mat-icon>
 			</button>
+			<button
+				mat-icon-button
+				class="example-icon"
+				(click)="toggleLogin()"
+			>
+				L
+			</button>
 		</mat-toolbar-row>
 	</mat-toolbar>
 </p>
 
-<div *ngIf="loggedIn">
-	<!--Router bzw. content-->
-	<router-outlet></router-outlet>
-</div>
-<div *ngIf="!loggedIn">
-	<mat-card id="login">
-		<mat-card-header>LOGIN FIRST!</mat-card-header>
-		<mat-card-content>
-			<mat-form-field appearance="fill">
-				<mat-label>Enter your password</mat-label>
-				<input
-					matInput
-					[type]="hide ? 'password' : 'text'"
-					#passwordInput
-				/>
-				<button
-					mat-icon-button
-					matSuffix
-					(click)="hide = !hide"
-					[attr.aria-label]="'Hide password'"
-					[attr.aria-pressed]="hide"
-				>
-					<mat-icon>{{
-						hide ? "visibility_off" : "visibility"
-					}}</mat-icon>
-				</button>
-			</mat-form-field>
-			<br />
-			<button mat-button (click)="login(passwordInput.value)">
-				Login
-			</button>
-		</mat-card-content>
-	</mat-card>
-</div>
+<!--Router bzw. content-->
+<router-outlet></router-outlet>
 
+<div *ngIf="showLogin">
+	<app-login id="loginBox"></app-login>
+</div>
 <!--messages display-->
 <!-- <app-message></app-message> -->
 

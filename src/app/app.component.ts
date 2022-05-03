@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { TokenStorageService } from './auth/token-storage.service';
 import { MessageService } from './message.service';
 import { SettingsServiceService } from './settings-service.service';
 
@@ -11,30 +13,10 @@ export class AppComponent {
 	title = 'TiBoLi';
 	footerText = 'Tim Gabrikowski';
 
-	constructor(
-		private messageService: MessageService,
-		private settingsService: SettingsServiceService
-	) {}
-
-	loggedIn: boolean = false;
-	hide = true;
-
-	OnInit() {
-		// if (localStorage.getItem('loggedIn') == 'true') {
-		// 	this.loggedIn = true;
-		// } else {
-		// 	this.loggedIn = false;
-		// }
+	constructor() {}
+	showLogin: boolean = false;
+	toggleLogin() {
+		this.showLogin = !this.showLogin;
 	}
-
-	login(password: string) {
-		this.settingsService.checkLogin(password, (status: number) => {
-			if (status == 1) {
-				this.loggedIn = true;
-				localStorage.setItem('loggedIn', 'true');
-			} else {
-				this.messageService.add('FALSCH!');
-			}
-		});
-	}
+	OnInit() {}
 }

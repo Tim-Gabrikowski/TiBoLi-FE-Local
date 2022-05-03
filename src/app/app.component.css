@@ -13,3 +13,11 @@
 	width: 300px;
 	margin: 20px;
 }
+
+#loginBox {
+	position: fixed;
+	top: 80px;
+	right: 20px;
+
+	width: 400px;
+}

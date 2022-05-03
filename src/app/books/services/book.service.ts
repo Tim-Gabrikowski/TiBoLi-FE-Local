@@ -50,32 +50,22 @@ export class BookService {
 
 		return this.http
 			.get<IBook[]>(this.booksUrl)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IBook[]>('get Books', []))
-			);
+			.pipe(catchError(this.handleError<IBook[]>('get Books', [])));
 	}
 	getBook(id: Number): Observable<IBook[]> {
 		return this.http
 
 			.get<IBook[]>(this.booksUrl + '/' + id)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IBook[]>('get Books'))
-			);
+			.pipe(catchError(this.handleError<IBook[]>('get Books')));
 	}
 	getBookWithCopies(id: Number): Observable<IBook> {
 		return this.http
 			.get<IBook>(this.booksUrl + '/' + id + '/copies')
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IBook>('get Books with copy'))
-			);
+			.pipe(catchError(this.handleError<IBook>('get Books with copy')));
 	}
 	updateBook(book: IBook): void {
 		this.log(' Buch wird gespeichert....');
 		var req = this.http.put(this.booksUrl, book, this.httpOptions).pipe(
-			this.delayRetry(1000, 3),
 			tap((_) => this.log(`updated book id=${book.id}`)),
 			catchError(this.handleError<any>('updateBook'))
 		);
@@ -96,7 +86,6 @@ export class BookService {
 				this.httpOptions
 			)
 			.pipe(
-				this.delayRetry(1000, 3),
 				tap((_) => this.log(`Buch speichern`)),
 				catchError(this.handleError<any>('updateBook'))
 			);
@@ -112,26 +101,17 @@ export class BookService {
 				{ bookId: bookId, amount: amount },
 				this.httpOptions
 			)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<ICopy[]>('create new copy'))
-			);
+			.pipe(catchError(this.handleError<ICopy[]>('create new copy')));
 	}
 	searchBookByTitle(term: string): Observable<IBook[]> {
 		return this.http
 			.get<IBook[]>(this.booksUrl + '/search/title/' + term)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IBook[]>('get Books', []))
-			);
+			.pipe(catchError(this.handleError<IBook[]>('get Books', [])));
 	}
 	searchBookByAuthor(term: string): Observable<IBook[]> {
 		return this.http
 			.get<IBook[]>(this.booksUrl + '/search/author/' + term)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IBook[]>('get Books', []))
-			);
+			.pipe(catchError(this.handleError<IBook[]>('get Books', [])));
 	}
 	deleteCopy(mNumber: number | Number) {
 		var req = this.http
@@ -141,7 +121,6 @@ export class BookService {
 				this.httpOptions
 			)
 			.pipe(
-				this.delayRetry(1000, 3),
 				tap((_) => this.log(`Exemplar löschen...`)),
 				catchError(this.handleError<any>('deleteCopy'))
 			);
@@ -151,7 +130,6 @@ export class BookService {
 	}
 	deleteBook(id: number | Number) {
 		var req = this.http.delete(this.booksUrl + '/' + id).pipe(
-			this.delayRetry(1000, 3),
 			tap((_) => this.log(`delete Book`)),
 			catchError(this.handleError<any>('deleteBook'))
 		);
