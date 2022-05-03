@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { windowWhen } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { MessageService } from '../message.service';
@@ -14,7 +16,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private authService: AuthService,
 		private tokenStorage: TokenStorageService,
-		private messageService: MessageService
+		private messageService: MessageService,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -31,6 +34,8 @@ export class LoginComponent implements OnInit {
 				this.tokenStorage.saveRefreshToken(data.refreshToken);
 				this.tokenStorage.saveUser(data.user);
 				this.loggedIn = true;
+
+				window.location.reload();
 			},
 			(err) => {
 				console.log(err);
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
 			this.messageService.add('Logged out.');
 			this.tokenStorage.signOut();
 			this.loggedIn = false;
+			this.router.navigate(['/']);
 		});
 	}
 }
