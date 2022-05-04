@@ -38,7 +38,7 @@ export class PdfService {
 				}
 			);
 	}
-	CustomerPdfURL: string = 'pdf/pdf/users';
+	CustomerPdfURL: string = 'pdf/pdf/customers';
 
 	downloadCustomerPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
