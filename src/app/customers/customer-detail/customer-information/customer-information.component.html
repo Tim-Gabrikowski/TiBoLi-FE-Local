@@ -1,0 +1,21 @@
+<div *ngIf="customer">
+	<mat-card>
+		<mat-card-title>Vorname:</mat-card-title>
+		<mat-card-content>{{ customer.vorname }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Nachname:</mat-card-title>
+		<mat-card-content>{{ customer.nachname }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Benutzernummer</mat-card-title>
+		<mat-card-content>{{ customer.id }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Klasse</mat-card-title>
+		<mat-card-content
+			>{{ customer.class!.class
+			}}{{ customer.class!.letter }}</mat-card-content
+		>
+	</mat-card>
+</div>

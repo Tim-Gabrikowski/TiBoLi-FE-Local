@@ -1,0 +1,14 @@
+<div *ngIf="customer" class="full">
+	<button
+		class="btn"
+		Mat-list-item
+		color="primary"
+		type="button"
+		(click)="onSelectCustomer(customer)"
+	>
+		<span class="name">{{ customer.nachname }}, </span>
+		<span class="author">{{ customer.vorname }}</span>
+	</button>
+
+	<mat-divider></mat-divider>
+</div>

@@ -4,7 +4,7 @@
 		<mat-card-content>
 			<mat-form-field appearance="fill">
 				<mat-label>Benutzername</mat-label>
-				<input matInput #usernameInput />
+				<input matInput #customernameInput />
 			</mat-form-field>
 			<mat-form-field appearance="fill">
 				<mat-label>Passwort</mat-label>
@@ -28,7 +28,7 @@
 			<br />
 			<button
 				mat-button
-				(click)="login(usernameInput.value, passwordInput.value)"
+				(click)="login(customernameInput.value, passwordInput.value)"
 			>
 				Login
 			</button>

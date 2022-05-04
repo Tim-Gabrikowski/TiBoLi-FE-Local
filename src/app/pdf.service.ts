@@ -38,12 +38,12 @@ export class PdfService {
 				}
 			);
 	}
-	UserPdfURL: string = 'pdf/pdf/users';
+	CustomerPdfURL: string = 'pdf/pdf/users';
 
-	downloadUserPDF(body: {}, callback: Function): any {
+	downloadCustomerPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
 		this.http
-			.post(this.UserPdfURL, body, { responseType: 'blob' })
+			.post(this.CustomerPdfURL, body, { responseType: 'blob' })
 			.subscribe(
 				(response) => {
 					var blob = new Blob([response], { type: mediaType });

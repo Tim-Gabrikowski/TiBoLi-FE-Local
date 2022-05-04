@@ -1,0 +1,30 @@
+<button
+	mat-icon-button
+	aria-label="Example icon button with a vertical three dot icon"
+	(click)="backToList()"
+>
+	<mat-icon>arrow_back_ios</mat-icon>
+</button>
+<span *ngIf="customer" class="font-a">
+	Details von {{ customer.vorname }} {{ customer.nachname }}
+</span>
+
+<mat-tab-group #tabGroup (selectedTabChange)="selectedTabChange($event)">
+	<mat-tab label="Overview">
+		<app-customer-information
+			[customer]="customer"
+		></app-customer-information>
+	</mat-tab>
+	<mat-tab label="Edit">
+		<app-customer-edit [customer]="customer"></app-customer-edit>
+	</mat-tab>
+	<mat-tab label="Transaktionen">
+		<app-customer-transactions
+			[transactions]="transactions"
+		></app-customer-transactions>
+	</mat-tab>
+</mat-tab-group>
+
+<div *ngIf="!customer">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>

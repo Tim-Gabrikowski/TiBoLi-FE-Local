@@ -25,7 +25,7 @@ export class LentComponent implements OnInit {
 	books: Idata[] = [];
 	ngOnInit(): void {}
 
-	setUserNumber(num: string) {
+	setCustomerNumber(num: string) {
 		this.bNumber = Number(num);
 	}
 	addBook(num: string) {

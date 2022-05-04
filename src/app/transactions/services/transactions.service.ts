@@ -79,31 +79,31 @@ export class TransactionsService {
 			callback();
 		});
 	}
-	getTransactionsFromUser(num: number): Observable<ITransaction[]> {
+	getTransactionsFromCustomer(num: number): Observable<ITransaction[]> {
 		return this.http
-			.get<ITransaction[]>(this.transactionsUrl + '/user/' + num)
+			.get<ITransaction[]>(this.transactionsUrl + '/customer/' + num)
 			.pipe(
 				this.delayRetry(1000, 3),
 				catchError(
 					this.handleError<ITransaction[]>(
-						'get Transations from User',
+						'get Transations from Customer',
 						[]
 					)
 				)
 			);
 	}
-	getTransactionsWithBookFromUser(
+	getTransactionsWithBookFromCustomer(
 		num: number
 	): Observable<ITransactionBook[]> {
 		return this.http
 			.get<ITransactionBook[]>(
-				this.transactionsUrl + '/user/' + num + '/books'
+				this.transactionsUrl + '/customer/' + num + '/books'
 			)
 			.pipe(
 				this.delayRetry(1000, 3),
 				catchError(
 					this.handleError<ITransactionBook[]>(
-						'get Transations from User',
+						'get Transations from Customer',
 						[]
 					)
 				)

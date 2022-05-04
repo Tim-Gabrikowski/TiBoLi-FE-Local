@@ -9,7 +9,7 @@ import { FormatDatePipe } from './pipes/dateManagement/format-date.pipe';
 import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
 //modules:
 import { BooksModule } from './books/books.module';
-import { UsersModule } from './users/users.module';
+import { CustomersModule } from './customers/customers.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
 //components:
@@ -54,13 +54,13 @@ import { LoginComponent } from './login/login.component';
 		TransactionStatusPipe,
 		DocumentationComponent,
 		APIDocumentationComponent,
-  LoginComponent,
+		LoginComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BooksModule,
-		UsersModule,
+		CustomersModule,
 		HttpClientModule,
 		FormsModule,
 		BrowserAnimationsModule,
