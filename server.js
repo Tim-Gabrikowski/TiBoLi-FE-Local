@@ -1,8 +1,9 @@
 const express = require("express");
 const handleError = require("./errorHandling");
+require("dotenv").config();
 const colors = require("colors");
 const app = express();
-const port = 80;
+const port = process.env.BUILD_PORT || 8083;
 
 app.use("/", express.static("dist/TiBoLi-FE-Local"));
 
