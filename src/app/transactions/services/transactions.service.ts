@@ -5,6 +5,7 @@ import { catchError, delay, mergeMap, retryWhen, tap } from 'rxjs/operators';
 import { ITransaction } from 'src/app/interfaces/transaction';
 import { ITransactionBook } from 'src/app/interfaces/transactionBook';
 import { MessageService } from 'src/app/message.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -22,7 +23,7 @@ export class TransactionsService {
 		}),
 	};
 
-	transactionsUrl: string = 'api/transactions';
+	transactionsUrl: string = environment.apiUrl + '/transactions';
 
 	getAll(): Observable<ITransaction[]> {
 		this.log('transactions werden geladen!');

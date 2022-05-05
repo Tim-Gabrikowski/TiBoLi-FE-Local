@@ -13,6 +13,7 @@ import {
 import { IClass } from 'src/app/interfaces/class';
 import { ICustomer } from 'src/app/interfaces/customer';
 import { MessageService } from 'src/app/message.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -22,7 +23,7 @@ export class CustomersService {
 		private http: HttpClient,
 		private messageService: MessageService
 	) {}
-	private customersUrl = 'api/customers';
+	private customersUrl = environment.apiUrl + '/customers';
 
 	httpOptions = {
 		headers: new HttpHeaders({

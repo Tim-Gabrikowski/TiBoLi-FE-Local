@@ -13,6 +13,7 @@ import {
 import { IBook } from 'src/app/interfaces/book';
 import { ICopy } from 'src/app/interfaces/copy';
 import { MessageService } from 'src/app/message.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -23,8 +24,8 @@ export class BookService {
 		private messageService: MessageService
 	) {}
 
-	private booksUrl = 'api/books';
-	private copiesUrl = 'api/copies';
+	private booksUrl = environment.apiUrl + '/books';
+	private copiesUrl = environment.apiUrl + '/copies';
 
 	httpOptions = {
 		headers: new HttpHeaders({

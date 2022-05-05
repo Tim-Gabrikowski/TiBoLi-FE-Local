@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { MessageService } from './message.service';
@@ -18,5 +19,7 @@ export class AppComponent {
 	toggleLogin() {
 		this.showLogin = !this.showLogin;
 	}
-	OnInit() {}
+	OnInit() {
+		console.log('Production?', environment.production);
+	}
 }

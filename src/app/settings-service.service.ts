@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, mergeMap, retryWhen, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class SettingsServiceService {
 		}),
 	};
 
-	settingsUrl: string = 'api/settings';
+	settingsUrl: string = environment.apiUrl + '/settings';
 
 	checkLogin(login: string, callback: Function) {
 		var req = this.http

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { retryWhen, delay, mergeMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class PdfService {
 		}),
 	};
 
-	BookPdfURL: string = 'pdf/pdf/books';
+	BookPdfURL: string = environment.pdfUrl + '/books';
 
 	downloadBookPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
@@ -38,7 +39,7 @@ export class PdfService {
 				}
 			);
 	}
-	CustomerPdfURL: string = 'pdf/pdf/customers';
+	CustomerPdfURL: string = environment.pdfUrl + '/customers';
 
 	downloadCustomerPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
