@@ -5,8 +5,13 @@ const colors = require("colors");
 const app = express();
 const port = process.env.BUILD_PORT || 8083;
 
-app.use("/", express.static("dist/TiBoLi-FE-Local"));
+const booksApiRouter = require(process.env.RELATIVE_PATH_TO_BACKEND_MODULE);
 
+app.use("/api/", booksApiRouter);
+app.use(express.static("dist/TiBoLi-FE-Local"));
+app.use("*", (req, res) => {
+	res.sendFile(__dirname + "/dist/TiBoLi-FE-Local/index.html");
+});
 app.listen(port, () => {
 	console.log("Build Server online on Port:", port);
 	console.log(" http://0.0.0.0:" + port);
