@@ -1,5 +1,5 @@
 export interface IClass {
 	id: number;
-	class: number;
+	year: number;
 	letter: string;
 }

@@ -1,6 +1,5 @@
 export interface ICopy {
-	copyId: Number;
-	mNumber: Number;
+	id: Number;
 	bookId: Number;
 	lifecycle: Number;
 }

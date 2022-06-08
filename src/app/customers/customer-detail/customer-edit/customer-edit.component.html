@@ -2,36 +2,36 @@
 	<h2>Benutzer bearbeiten</h2>
 	<div>
 		<mat-form-field appearance="fill">
-			<mat-label>Vorname:</mat-label>
+			<mat-label>name:</mat-label>
 			<input
 				matInput
-				value="{{ customer.vorname }}"
+				value="{{ customer.name }}"
 				placeholder="John"
-				#vorname
+				#name
 			/>
 		</mat-form-field>
 
 		<mat-form-field appearance="fill">
-			<mat-label>Nachname:</mat-label>
+			<mat-label>lastname:</mat-label>
 			<input
 				matInput
-				value="{{ customer.nachname }}"
+				value="{{ customer.lastname }}"
 				placeholder="Doe"
-				#nachname
+				#lastname
 			/>
 		</mat-form-field>
 		<mat-form-field appearance="fill">
 			<mat-label>Klasse</mat-label>
 			<mat-select name="class" [value]="customer.classId" #class>
 				<mat-option *ngFor="let class of classes" [value]="class.id">
-					{{ class.class }}{{ class.letter }}
+					{{ class.year }}{{ class.letter }}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<br />
 		<button
 			mat-fab
-			(click)="onSubmit(vorname.value, nachname.value, class.value)"
+			(click)="onSubmit(name.value, lastname.value, class.value)"
 			color="primary"
 			class="button"
 			matTooltip="Änderung speichern"

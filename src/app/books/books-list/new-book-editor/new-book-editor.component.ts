@@ -80,7 +80,7 @@ export class NewBookEditorComponent implements OnInit {
 			var book = {
 				title: this.newBookTitle!,
 				author: this.newBookAuthor!,
-				mNumber: element.mNumber,
+				mNumber: element.id,
 			};
 			books.push(book);
 		});

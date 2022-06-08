@@ -30,9 +30,9 @@ export class CutomerEditComponent implements OnInit {
 		});
 	}
 
-	onSubmit(vorname: string, nachname: string, classId: number) {
-		this.customer!.vorname = vorname;
-		this.customer!.nachname = nachname;
+	onSubmit(name: string, lastname: string, classId: number) {
+		this.customer!.name = name;
+		this.customer!.lastname = lastname;
 		this.customer!.classId = classId;
 		this.customerService.editCustomer(this.customer!);
 		this.router.navigate(['/customers/' + this.customer!.id + '/overview']);

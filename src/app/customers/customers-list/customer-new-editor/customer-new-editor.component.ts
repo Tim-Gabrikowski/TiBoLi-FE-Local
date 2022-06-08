@@ -32,18 +32,18 @@ export class CustomerNewEditorComponent implements OnInit {
 			this.classes = classes;
 		});
 	}
-	createNewCustomer(vorname: string, nachname: string, classId: number) {
-		console.log(vorname, nachname, classId);
-		if (vorname === undefined) {
-			this.log('Kein Vorname?');
-		} else if (nachname === undefined) {
+	createNewCustomer(name: string, lastname: string, classId: number) {
+		console.log(name, lastname, classId);
+		if (name === undefined) {
+			this.log('Kein name?');
+		} else if (lastname === undefined) {
 			this.log('Kein Nachanme?');
 		} else if (classId === undefined) {
 			this.log('Keine Klasse? Bitte Klasse auswählen');
 		} else {
 			this.customerService.newCustomer(
-				vorname,
-				nachname,
+				name,
+				lastname,
 				classId,
 				(customer: ICustomer) => {
 					this.newCustomer! = customer;

@@ -91,7 +91,7 @@ export class BookService {
 				catchError(this.handleError<any>('updateBook'))
 			);
 		req.subscribe((result) => {
-			callback(result.insertId);
+			callback(result.id);
 			this.log('Buch gespeichert');
 		});
 	}

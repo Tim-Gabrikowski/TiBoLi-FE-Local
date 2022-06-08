@@ -2,7 +2,7 @@
 	<div *ngFor="let copy of book.copies">
 		<mat-card class="float">
 			<mat-card-content>
-				<p>mNumber: {{ copy.mNumber }}</p>
+				<p>mNumber: {{ copy.id }}</p>
 				<br />
 				<p>anm.</p>
 			</mat-card-content>
@@ -14,25 +14,19 @@
 					mat-mini-fab
 					color="accent"
 					aria-label="Example icon button with a plus one icon"
-					(click)="deleteCopy(copy.mNumber)"
+					(click)="deleteCopy(copy.id)"
 					class="cardActionButton"
 				>
 					<mat-icon matTooltip="Aus Ausleihe nehmen">
 						delete
 					</mat-icon>
 				</button>
-				<div *ngIf="!isCopyForPrint(copy.mNumber)">
+				<div *ngIf="!isCopyForPrint(copy.id)">
 					<button
 						mat-mini-fab
 						color="accent"
 						aria-label="Example icon button with a plus one icon"
-						(click)="
-							addToPrint(
-								copy.mNumber,
-								copy.copyId,
-								copy.lifecycle
-							)
-						"
+						(click)="addToPrint(copy.id, copy.lifecycle)"
 						class="cardActionButton"
 					>
 						<mat-icon matTooltip="Für Druck markieren">
@@ -40,13 +34,13 @@
 						</mat-icon>
 					</button>
 				</div>
-				<div *ngIf="isCopyForPrint(copy.mNumber)">
+				<div *ngIf="isCopyForPrint(copy.id)">
 					<button
 						mat-mini-fab
 						color="accent"
 						aria-label="Example icon button with a plus one icon"
 						class="cardActionButton"
-						(click)="removeFromPrint(copy.mNumber)"
+						(click)="removeFromPrint(copy.id)"
 					>
 						<mat-icon matTooltip="Nicht mehr Drucken">
 							remove_circle_outline

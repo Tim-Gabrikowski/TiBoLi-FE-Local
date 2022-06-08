@@ -2,8 +2,8 @@ import { IClass } from './class';
 
 export interface ICustomer {
 	id: number;
-	vorname: string;
-	nachname: string;
+	name: string;
+	lastname: string;
 	classId: number;
 	class?: IClass;
 }

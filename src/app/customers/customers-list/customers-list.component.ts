@@ -23,7 +23,7 @@ export class CustomersListComponent implements OnInit {
 	newEditor: boolean = false;
 
 	ngOnInit(): void {
-		this.getBooks();
+		this.getCustomers();
 	}
 
 	log(msg: string) {
@@ -32,8 +32,9 @@ export class CustomersListComponent implements OnInit {
 	backToHome() {
 		this.router.navigate(['']);
 	}
-	getBooks() {
+	getCustomers() {
 		this.customerService.getCustomers().subscribe((customers) => {
+			console.log(customers);
 			this.customers = customers;
 			this.log('Nutzer geladen');
 		});
@@ -41,8 +42,8 @@ export class CustomersListComponent implements OnInit {
 	searchCustomer(term: string) {
 		this.filteredCustomers = this.customers.filter(
 			(customer) =>
-				customer.vorname.toLowerCase().includes(term.toLowerCase()) ||
-				customer.nachname.toLowerCase().includes(term.toLowerCase())
+				customer.name.toLowerCase().includes(term.toLowerCase()) ||
+				customer.lastname.toLowerCase().includes(term.toLowerCase())
 		);
 		this.searched = true;
 	}

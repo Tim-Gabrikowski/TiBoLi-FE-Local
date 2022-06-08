@@ -84,8 +84,8 @@ export class CustomersService {
 			);
 	}
 	newCustomer(
-		vorname: string | String,
-		nachname: string | String,
+		name: string | String,
+		lastname: string | String,
 		classId: number | Number,
 		callback: Function
 	): void {
@@ -93,7 +93,7 @@ export class CustomersService {
 		var req = this.http
 			.put(
 				this.customersUrl,
-				{ vorname: vorname, nachname: nachname, classId: classId },
+				{ name: name, lastname: lastname, classId: classId },
 				this.httpOptions
 			)
 			.pipe(

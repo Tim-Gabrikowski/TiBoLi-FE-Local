@@ -6,7 +6,7 @@
 	<mat-icon>arrow_back_ios</mat-icon>
 </button>
 <span *ngIf="customer" class="font-a">
-	Details von {{ customer.vorname }} {{ customer.nachname }}
+	Details von {{ customer.name }} {{ customer.lastname }}
 </span>
 
 <mat-tab-group #tabGroup (selectedTabChange)="selectedTabChange($event)">

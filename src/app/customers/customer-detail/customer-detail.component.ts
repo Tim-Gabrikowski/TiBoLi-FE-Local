@@ -50,6 +50,7 @@ export class CustomerDetailComponent implements OnInit {
 
 	getCustomer(id: number) {
 		this.customerService.getCustomerWithClass(id).subscribe((customer) => {
+			console.log(customer);
 			this.customer = customer;
 		});
 	}
@@ -60,6 +61,7 @@ export class CustomerDetailComponent implements OnInit {
 		this.transactionService
 			.getTransactionsWithBookFromCustomer(bNum)
 			.subscribe((result) => {
+				console.log(result);
 				this.transactions = result;
 			});
 	}

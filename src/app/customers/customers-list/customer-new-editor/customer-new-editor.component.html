@@ -2,17 +2,17 @@
 	<mat-card-title> Neuen Nutzer anlegen </mat-card-title>
 	<mat-card-content>
 		<mat-stepper orientation="vertical" #stepper>
-			<!--Name / vorname-->
+			<!--Name / name-->
 			<mat-step>
 				<ng-template matStepLabel>Details eingeben</ng-template>
 				<mat-form-field appearance="fill">
-					<mat-label>Vorname</mat-label>
-					<input matInput value="" placeholder="z.B. John" #vorname />
+					<mat-label>name</mat-label>
+					<input matInput value="" placeholder="z.B. John" #name />
 				</mat-form-field>
 				<br />
 				<mat-form-field appearance="fill">
-					<mat-label>Nachname:</mat-label>
-					<input matInput value="" placeholder="z.B. Doe" #nachname />
+					<mat-label>lastname:</mat-label>
+					<input matInput value="" placeholder="z.B. Doe" #lastname />
 				</mat-form-field>
 				<br />
 				<button mat-button matStepperNext>Next</button>
@@ -26,7 +26,7 @@
 							*ngFor="let class of classes"
 							[value]="class.id"
 						>
-							{{ class.class }}{{ class.letter }}
+							{{ class.year }}{{ class.letter }}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
@@ -36,8 +36,8 @@
 					matStepperNext
 					(click)="
 						createNewCustomer(
-							vorname.value,
-							nachname.value,
+							name.value,
+							lastname.value,
 							class.value
 						)
 					"
@@ -48,9 +48,9 @@
 			<mat-step>
 				<ng-template matStepLabel>Aktion beenden</ng-template>
 				<div *ngIf="newCustomer">
-					{{ newCustomer.nachname }}, {{ newCustomer.vorname }}<br />
+					{{ newCustomer.lastname }}, {{ newCustomer.name }}<br />
 					Benutzernummer: {{ newCustomer.id }}<br />
-					Klasse: {{ classes[newCustomer.classId - 1].class
+					Klasse: {{ classes[newCustomer.classId - 1].year
 					}}{{ classes[newCustomer.classId - 1].letter }}
 				</div>
 				<div *ngIf="!newCustomer">Loading...</div>

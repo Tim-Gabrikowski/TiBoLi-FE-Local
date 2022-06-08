@@ -31,7 +31,7 @@ export class BookCopiesComponent implements OnInit {
 	deleteCopy(mNumber: number | Number) {
 		this.bookService.deleteCopy(mNumber);
 		var index: number | undefined = this.book!.copies?.findIndex(
-			(item) => item.mNumber === mNumber
+			(item) => item.id === mNumber
 		);
 		if (!(index === undefined)) {
 			this.book!.copies![index].lifecycle = 5;
@@ -43,10 +43,9 @@ export class BookCopiesComponent implements OnInit {
 
 	printCopies: ICopy[] = [];
 	loadLables: boolean = false;
-	addToPrint(mNumber: Number, copyID: Number, lifecycle: Number) {
+	addToPrint(copyID: Number, lifecycle: Number) {
 		var copy = {
-			mNumber: mNumber,
-			copyId: copyID,
+			id: copyID,
 			lifecycle: lifecycle,
 			bookId: this.book!.id,
 		};
@@ -54,10 +53,10 @@ export class BookCopiesComponent implements OnInit {
 		console.log('print: ', copy);
 	}
 	removeFromPrint(mNumber: Number) {
-		this.printCopies = this.printCopies.filter((e) => e.mNumber != mNumber);
+		this.printCopies = this.printCopies.filter((e) => e.id != mNumber);
 	}
 	isCopyForPrint(mNumber: Number) {
-		if (this.printCopies.filter((e) => e.mNumber == mNumber).length > 0) {
+		if (this.printCopies.filter((e) => e.id == mNumber).length > 0) {
 			return true;
 		} else {
 			return false;
@@ -74,7 +73,7 @@ export class BookCopiesComponent implements OnInit {
 			var book = {
 				title: this.book!.title,
 				author: this.book!.author,
-				mNumber: element.mNumber,
+				mNumber: element.id,
 			};
 			books.push(book);
 		});
