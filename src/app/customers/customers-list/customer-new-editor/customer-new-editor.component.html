@@ -49,9 +49,9 @@
 				<ng-template matStepLabel>Aktion beenden</ng-template>
 				<div *ngIf="newCustomer">
 					{{ newCustomer.lastname }}, {{ newCustomer.name }}<br />
-					Benutzernummer: {{ newCustomer.id }}<br />
 					Klasse: {{ classes[newCustomer.classId - 1].year
-					}}{{ classes[newCustomer.classId - 1].letter }}
+					}}{{ classes[newCustomer.classId - 1].letter }} <br />
+					Benutzernummer: {{ newCustomer.id }}<br />
 				</div>
 				<div *ngIf="!newCustomer">Loading...</div>
 				<button matStepperNext mat-button>Weiter</button>

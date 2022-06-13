@@ -12,7 +12,7 @@ app.use(express.static("dist/TiBoLi-FE-Local"));
 app.use("*", (req, res) => {
 	res.sendFile(__dirname + "/dist/TiBoLi-FE-Local/index.html");
 });
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
 	console.log("Build Server online on Port:", port);
 	console.log(" http://0.0.0.0:" + port);
 });
