@@ -1,5 +1,5 @@
 export const environment = {
 	production: true,
-	apiUrl: 'http://localhost:4200/api',
-	pdfUrl: 'http://localhost:4200/pdf',
+	apiUrl: 'http://tiboli.tech4web.de/api',
+	pdfUrl: 'http://tiboli.tech4web.de/pdf',
 };
