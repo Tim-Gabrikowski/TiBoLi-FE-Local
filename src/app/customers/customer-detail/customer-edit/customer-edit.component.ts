@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { IClass } from 'src/app/interfaces/class';
 import { ICustomer } from 'src/app/interfaces/customer';
+import { MessageService } from 'src/app/message.service';
 import { PdfService } from 'src/app/pdf.service';
 import { CustomersService } from '../../services/customers.service';
 
@@ -14,20 +16,38 @@ export class CutomerEditComponent implements OnInit {
 	constructor(
 		private customerService: CustomersService,
 		private router: Router,
-		private pdfService: PdfService
+		private pdfService: PdfService,
+		private messageService: MessageService,
+		private authService: AuthService
 	) {}
 
+	log(msg: string) {
+		this.messageService.add(msg);
+	}
 	@Input() customer?: ICustomer;
 	ngOnInit(): void {
 		this.getClasses();
 	}
 
 	classes: IClass[] = [];
+	hide: boolean = true;
 
 	getClasses() {
 		this.customerService.getClasses().subscribe((classes) => {
 			this.classes = classes;
 		});
+	}
+	registerNewUser(username: string, password: string, perm_group: number) {
+		console.log(username, password, perm_group);
+		this.log('neuer Nutzer: ' + username + ' wird erstellt');
+		this.authService
+			.register(username, password, perm_group, this.customer!.id)
+			.subscribe((data) => {
+				console.log(data);
+				this.router.navigate([
+					'/customers/' + this.customer!.id + '/overview',
+				]);
+			});
 	}
 
 	onSubmit(name: string, lastname: string, classId: number) {
@@ -43,6 +63,7 @@ export class CutomerEditComponent implements OnInit {
 	}
 	loadLables: boolean = false;
 	getPdfOfCustomers(startAt: string) {
+		this.log('Karte wird geladen, bitte warten');
 		var body = {
 			startAt: Number(startAt),
 			customers: [this.customer!],
@@ -53,6 +74,9 @@ export class CutomerEditComponent implements OnInit {
 			this.loadLables = false;
 		});
 	}
+	defaultPerm = 1;
+	permGroups = [0, 1, 2, 3, 4];
+
 	defaultLabelPosition = 0;
 	labelPositions = [
 		{

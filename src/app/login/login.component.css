@@ -1,0 +1,15 @@
+mat-card {
+	text-align: center;
+}
+mat-card-title {
+	margin-bottom: 10px;
+}
+mat-card-content {
+	margin-top: 20px;
+}
+#usernameInput {
+	width: 300px;
+}
+#passwordInput {
+	width: 300px;
+}

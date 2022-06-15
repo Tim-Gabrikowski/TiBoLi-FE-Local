@@ -1,12 +1,12 @@
 <div *ngIf="!loggedIn">
 	<mat-card id="login">
-		<mat-card-header>In Konto einloggen</mat-card-header>
+		<mat-card-title>In Konto einloggen</mat-card-title>
 		<mat-card-content>
-			<mat-form-field appearance="fill">
+			<mat-form-field appearance="fill" id="usernameInput">
 				<mat-label>Benutzername</mat-label>
-				<input matInput #customernameInput />
+				<input matInput #usernameInput />
 			</mat-form-field>
-			<mat-form-field appearance="fill">
+			<mat-form-field appearance="fill" id="passwordInput">
 				<mat-label>Passwort</mat-label>
 				<input
 					matInput
@@ -27,8 +27,9 @@
 			</mat-form-field>
 			<br />
 			<button
-				mat-button
-				(click)="login(customernameInput.value, passwordInput.value)"
+				mat-flat-button
+				color="accent"
+				(click)="login(usernameInput.value, passwordInput.value)"
 			>
 				Login
 			</button>
@@ -37,9 +38,12 @@
 </div>
 <div *ngIf="loggedIn">
 	<mat-card>
-		<mat-card-title>Eingeloggt</mat-card-title>
+		<mat-card-title>Hallo {{ user!.username }}!</mat-card-title>
 		<mat-card-content>
-			<button mat-button (click)="logout()">Logout</button>
+			<p>Rang: {{ user!.perm_group | permGroup }}</p>
+			<button mat-flat-button color="accent" (click)="logout()">
+				Logout
+			</button>
 		</mat-card-content>
 	</mat-card>
 </div>

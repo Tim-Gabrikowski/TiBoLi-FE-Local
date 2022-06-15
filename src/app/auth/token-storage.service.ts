@@ -41,4 +41,7 @@ export class TokenStorageService {
 		}
 		return {};
 	}
+	public isLoggedIn() {
+		return window.sessionStorage.getItem(USER_KEY) ? true : false;
+	}
 }

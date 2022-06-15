@@ -18,4 +18,11 @@
 			}}{{ customer.class!.letter }}</mat-card-content
 		>
 	</mat-card>
+	<mat-card *ngIf="customer.user">
+		<mat-card-title>Benutzerkonto</mat-card-title>
+		<mat-card-content>
+			Nutzername: {{ customer.user.username }} <br />
+			Rang: {{ customer.user.perm_group | permGroup }}
+		</mat-card-content>
+	</mat-card>
 </div>

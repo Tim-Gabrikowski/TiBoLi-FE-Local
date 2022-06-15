@@ -23,6 +23,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { AppModule } from '../app.module';
+import { PermGroupPipeModule } from '../pipes/perm-group-pipe/perm-group-pipe.module';
 
 @NgModule({
 	declarations: [
@@ -52,6 +54,7 @@ import { MatTableModule } from '@angular/material/table';
 		MatStepperModule,
 		MatSelectModule,
 		MatTableModule,
+		PermGroupPipeModule,
 	],
 	exports: [CustomersListComponent],
 })

@@ -16,9 +16,21 @@
 
 #loginBox {
 	position: fixed;
-	top: 80px;
-	right: 20px;
+	top: 50%;
+	right: 50%;
+
+	transform: translate(50%, -50%);
 
 	width: 400px;
 	z-index: 100;
+}
+#loginContainer {
+	position: fixed;
+	top: 64px;
+	left: 0px;
+	z-index: 99;
+	height: 100%;
+	width: 100%;
+
+	background-color: rgba(64, 64, 64, 0.558);
 }

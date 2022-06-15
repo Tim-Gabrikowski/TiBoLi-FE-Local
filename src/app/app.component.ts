@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth/auth.service';
-import { TokenStorageService } from './auth/token-storage.service';
-import { MessageService } from './message.service';
-import { SettingsServiceService } from './settings-service.service';
+
+const USER_KEY = 'auth-user';
 
 @Component({
 	selector: 'app-root',
@@ -18,6 +16,9 @@ export class AppComponent {
 	showLogin: boolean = false;
 	toggleLogin() {
 		this.showLogin = !this.showLogin;
+	}
+	closeLogin() {
+		this.showLogin = false;
 	}
 	OnInit() {
 		console.log('Production?', environment.production);

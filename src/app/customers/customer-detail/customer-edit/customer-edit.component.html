@@ -1,87 +1,153 @@
 <div *ngIf="customer">
-	<h2>Benutzer bearbeiten</h2>
-	<div>
-		<mat-form-field appearance="fill">
-			<mat-label>name:</mat-label>
-			<input
-				matInput
-				value="{{ customer.name }}"
-				placeholder="John"
-				#name
-			/>
-		</mat-form-field>
+	<!--Edit-->
+	<mat-card>
+		<mat-card-title>Benutzer bearbeiten</mat-card-title>
 
-		<mat-form-field appearance="fill">
-			<mat-label>lastname:</mat-label>
-			<input
-				matInput
-				value="{{ customer.lastname }}"
-				placeholder="Doe"
-				#lastname
-			/>
-		</mat-form-field>
-		<mat-form-field appearance="fill">
-			<mat-label>Klasse</mat-label>
-			<mat-select name="class" [value]="customer.classId" #class>
-				<mat-option *ngFor="let class of classes" [value]="class.id">
-					{{ class.year }}{{ class.letter }}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<br />
-		<button
-			mat-fab
-			(click)="onSubmit(name.value, lastname.value, class.value)"
-			color="primary"
-			class="button"
-			matTooltip="Änderung speichern"
-		>
-			<mat-icon>save</mat-icon>
-		</button>
-		<br />
-		<br />
-		<button
-			mat-fab
-			(click)="deleteCustomer()"
-			class="button"
-			matTooltip="Nutzer löschen (dies wird den Nutzer nicht umbringen)"
-			aria-label="Example icon button with a delete icon"
-		>
-			<mat-icon>delete</mat-icon>
-		</button>
-		<br />
-		<div id="printBox">
-			<h2>Benutzerkarte drucken</h2>
-			<div>
-				<mat-form-field appearance="fill">
-					<mat-label>Kartenposition</mat-label>
-					<mat-select
-						name="start"
-						[(value)]="defaultLabelPosition"
-						#start
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>name:</mat-label>
+				<input
+					matInput
+					value="{{ customer.name }}"
+					placeholder="John"
+					#name
+				/>
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>lastname:</mat-label>
+				<input
+					matInput
+					value="{{ customer.lastname }}"
+					placeholder="Doe"
+					#lastname
+				/>
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Klasse</mat-label>
+				<mat-select name="class" [value]="customer.classId" #class>
+					<mat-option
+						*ngFor="let class of classes"
+						[value]="class.id"
 					>
-						<mat-option
-							*ngFor="let position of labelPositions"
-							[value]="position.position"
-						>
-							{{ position.label }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</div>
-			<div>
-				<button
-					mat-flat-button
-					color="primary"
-					(click)="getPdfOfCustomers(start.value)"
-					class="m20"
+						{{ class.year }}{{ class.letter }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</mat-card-content>
+
+		<mat-card-actions align="end">
+			<button
+				mat-mini-fab
+				(click)="onSubmit(name.value, lastname.value, class.value)"
+				color="primary"
+				matTooltip="Änderung speichern"
+			>
+				<mat-icon>save</mat-icon>
+			</button>
+
+			<button
+				mat-mini-fab
+				(click)="deleteCustomer()"
+				matTooltip="Nutzer löschen (dies wird den Nutzer nicht umbringen)"
+				aria-label="Example icon button with a delete icon"
+			>
+				<mat-icon>delete</mat-icon>
+			</button>
+		</mat-card-actions>
+	</mat-card>
+
+	<!--Print-->
+	<mat-card>
+		<mat-card-title>Benutzerkarte drucken</mat-card-title>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Kartenposition</mat-label>
+				<mat-select
+					name="start"
+					[(value)]="defaultLabelPosition"
+					#start
 				>
-					Karte anfordern
+					<mat-option
+						*ngFor="let position of labelPositions"
+						[value]="position.position"
+					>
+						{{ position.label }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button
+				mat-flat-button
+				color="primary"
+				(click)="getPdfOfCustomers(start.value)"
+				matTooltip="PDF mit Karte für Benutzer generieren"
+			>
+				Karte anfordern
+			</button>
+		</mat-card-actions>
+	</mat-card>
+
+	<!--Nutzerkonto-->
+	<mat-card *ngIf="!customer!.user">
+		<mat-card-title>Nutzerkonto erstellen</mat-card-title>
+		<mat-card-content>
+			<!--username-->
+			<mat-form-field appearance="fill" id="usernameInput">
+				<mat-label>Benutzername</mat-label>
+				<input matInput #usernameInput />
+			</mat-form-field>
+			<!--password-->
+			<mat-form-field appearance="fill" id="passwordInput">
+				<mat-label>Passwort</mat-label>
+				<input
+					matInput
+					[type]="hide ? 'password' : 'text'"
+					#passwordInput
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
 				</button>
-				<div *ngIf="loadLables">
-					<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-				</div>
-			</div>
-		</div>
-	</div>
+			</mat-form-field>
+			<!--perm_group-->
+			<mat-form-field appearance="fill">
+				<mat-label>Kartenposition</mat-label>
+				<mat-select name="permission" [(value)]="defaultPerm" #perms>
+					<mat-option
+						*ngFor="let group of permGroups"
+						[value]="group"
+					>
+						{{ group | permGroup }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<!--submit-->
+			<button
+				mat-flat-button
+				color="primary"
+				matTooltip="Neues Konto registrieren"
+				(click)="
+					registerNewUser(
+						usernameInput.value,
+						passwordInput.value,
+						perms.value
+					)
+				"
+			>
+				Registrieren
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>

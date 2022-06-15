@@ -7,30 +7,13 @@
 			</button>
 			<span>{{ title }}</span>
 			<span class="example-spacer"></span>
-			<button mat-icon-button class="example-icon" routerLink="/books">
-				<mat-icon>book</mat-icon>
-			</button>
 			<button
-				mat-icon-button
-				class="example-icon"
-				routerLink="/customers"
-			>
-				<mat-icon>group</mat-icon>
-			</button>
-			<button
-				mat-icon-button
-				class="example-icon"
-				routerLink="transactions"
-			>
-				<mat-icon>call_made</mat-icon>
-				<mat-icon>call_received</mat-icon>
-			</button>
-			<button
-				mat-icon-button
+				mat-flat-button
 				class="example-icon"
 				(click)="toggleLogin()"
+				color="accent"
 			>
-				L
+				<mat-icon>reorder</mat-icon>
 			</button>
 		</mat-toolbar-row>
 	</mat-toolbar>
@@ -40,7 +23,12 @@
 <router-outlet></router-outlet>
 
 <div *ngIf="showLogin">
-	<app-login id="loginBox"></app-login>
+	<div id="loginContainer">
+		<app-login id="loginBox"></app-login>
+		<button mat-icon-button mat-tooltip="close" (click)="closeLogin()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
 </div>
 <!--messages display-->
 <!-- <app-message></app-message> -->

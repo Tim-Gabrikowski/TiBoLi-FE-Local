@@ -12,6 +12,7 @@ import { BooksModule } from './books/books.module';
 import { CustomersModule } from './customers/customers.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
+
 //components:
 import { MessageComponent } from './message/message.component';
 import { HomeComponent } from './home/home.component';
@@ -37,6 +38,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { authInterceptorProviders } from './auth/auth.interceptor';
 import { LoginComponent } from './login/login.component';
+import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.module';
 
 @NgModule({
 	declarations: [
@@ -48,13 +50,13 @@ import { LoginComponent } from './login/login.component';
 		LentComponent,
 		BackComponent,
 		MarkdownTestComponent,
+		DocumentationComponent,
+		APIDocumentationComponent,
+		LoginComponent,
 		//pipes:
 		DatePipe,
 		FormatDatePipe,
 		TransactionStatusPipe,
-		DocumentationComponent,
-		APIDocumentationComponent,
-		LoginComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -79,6 +81,7 @@ import { LoginComponent } from './login/login.component';
 		MatStepperModule,
 		MatExpansionModule,
 		MatProgressBarModule,
+		PermGroupPipeModule,
 	],
 	providers: [authInterceptorProviders],
 	bootstrap: [AppComponent],

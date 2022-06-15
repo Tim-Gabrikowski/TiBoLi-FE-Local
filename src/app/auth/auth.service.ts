@@ -37,4 +37,21 @@ export class AuthService {
 		newOptions.body = { token: token };
 		return this.http.delete(AUTH_API + '/logout', httpOptions);
 	}
+	register(
+		username: string,
+		password: string,
+		perm_group: number,
+		customerId: number | null
+	) {
+		return this.http.post(
+			AUTH_API + '/register',
+			{
+				username: username,
+				password: password,
+				perm_group: perm_group,
+				customerId: customerId,
+			},
+			httpOptions
+		);
+	}
 }
