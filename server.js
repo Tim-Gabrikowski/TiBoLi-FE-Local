@@ -19,8 +19,9 @@ console.error = console.log;
 
 const booksApiRouter = require(process.env.RELATIVE_PATH_TO_BACKEND_MODULE);
 
-app.use("/api/", booksApiRouter);
-app.use(express.static("dist/TiBoLi-FE-Local"));
+app.use("/api", booksApiRouter);
+
+app.use("/", express.static("dist/TiBoLi-FE-Local"));
 app.use("*", (req, res) => {
 	res.sendFile(__dirname + "/dist/TiBoLi-FE-Local/index.html");
 });
