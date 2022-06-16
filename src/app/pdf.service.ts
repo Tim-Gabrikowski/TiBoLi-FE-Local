@@ -21,7 +21,7 @@ export class PdfService {
 		}),
 	};
 
-	BookPdfURL: string = environment.pdfUrl + '/pdf/books';
+	BookPdfURL: string = environment.pdfUrl + '/books';
 
 	downloadBookPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
@@ -39,7 +39,7 @@ export class PdfService {
 				}
 			);
 	}
-	CustomerPdfURL: string = environment.pdfUrl + '/pdf/customers';
+	CustomerPdfURL: string = environment.pdfUrl + '/customers';
 
 	downloadCustomerPDF(body: {}, callback: Function): any {
 		var mediaType = 'application/pdf';
