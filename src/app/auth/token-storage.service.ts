@@ -41,6 +41,9 @@ export class TokenStorageService {
 		}
 		return {};
 	}
+	public getRawUser(): any {
+		return window.sessionStorage.getItem(USER_KEY);
+	}
 	public isLoggedIn() {
 		return window.sessionStorage.getItem(USER_KEY) ? true : false;
 	}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TokenStorageService } from './auth/token-storage.service';
 
 const USER_KEY = 'auth-user';
 
@@ -12,7 +13,7 @@ export class AppComponent {
 	title = 'TiBoLi';
 	footerText = 'Tim Gabrikowski';
 
-	constructor() {}
+	constructor(private tokenService: TokenStorageService) {}
 	showLogin: boolean = false;
 	toggleLogin() {
 		this.showLogin = !this.showLogin;
@@ -22,5 +23,9 @@ export class AppComponent {
 	}
 	OnInit() {
 		console.log('Production?', environment.production);
+	}
+	getLoggedIn() {
+		var user = this.tokenService.getRawUser();
+		return user ? true : false;
 	}
 }

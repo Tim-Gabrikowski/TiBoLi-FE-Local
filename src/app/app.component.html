@@ -13,7 +13,8 @@
 				(click)="toggleLogin()"
 				color="accent"
 			>
-				<mat-icon>reorder</mat-icon>
+				<mat-icon *ngIf="getLoggedIn()">reorder</mat-icon>
+				<span *ngIf="!getLoggedIn()">Login</span>
 			</button>
 		</mat-toolbar-row>
 	</mat-toolbar>
