@@ -1,21 +1,43 @@
 const express = require("express");
 const handleError = require("./errorHandling");
 require("dotenv").config();
-const colors = require("colors");
 const app = express();
 const port = process.env.BUILD_PORT || 8083;
 
 var fs = require("fs");
 var util = require("util");
-var logFile = fs.createWriteStream("log.txt", { flags: "a" });
-// Or 'w' to truncate the file every time the process starts.
-var logStdout = process.stdout;
+var log_file = fs.createWriteStream(
+	__dirname +
+		"/logs/log-" +
+		getDate(false).replaceAll(".", "_").replaceAll(":", "_") +
+		".log",
+	{ flags: "w" }
+);
+var log_stdout = process.stdout;
 
-console.log = function () {
-	logFile.write(util.format.apply(null, arguments) + "\n");
-	logStdout.write(util.format.apply(null, arguments) + "\n");
+console.log = function (d) {
+	var timestamp = "[" + getDate(true) + "]";
+	log_file.write(timestamp + " " + util.format(d) + "\n");
+	log_stdout.write(util.format(d) + "\n");
 };
 console.error = console.log;
+function getDate(space = true) {
+	var today = new Date();
+
+	if (space) {
+		return (
+			today.toLocaleDateString("de-DE") +
+			" " +
+			today.toLocaleTimeString("de-DE")
+		);
+	} else {
+		return (
+			today.toLocaleDateString("de-DE") +
+			"-" +
+			today.toLocaleTimeString("de-DE")
+		);
+	}
+}
 
 const booksApiRouter = require(process.env.RELATIVE_PATH_TO_BACKEND_MODULE);
 
