@@ -49,6 +49,13 @@ export class CutomerEditComponent implements OnInit {
 				]);
 			});
 	}
+	resetPassword(newPassword: string) {
+		this.authService
+			.resetPassword(String(this.customer!.user!.username), newPassword)
+			.subscribe((res) => {
+				console.log(res);
+			});
+	}
 
 	onSubmit(name: string, lastname: string, classId: number) {
 		this.customer!.name = name;

@@ -150,4 +150,41 @@
 			</button>
 		</mat-card-actions>
 	</mat-card>
+	<mat-card *ngIf="customer!.user">
+		<mat-card-title>Kundenkonto bearbeiten</mat-card-title>
+		<mat-card-content>
+			Nutzername: {{ customer!.user!.username }} <br />
+			<!--password-->
+			<mat-form-field appearance="fill" id="passwordInput">
+				<mat-label>neues Passwort</mat-label>
+				<input
+					matInput
+					[type]="hide ? 'password' : 'text'"
+					#newPasswordInput
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<!--submit-->
+			<button
+				mat-flat-button
+				color="primary"
+				matTooltip="Passwort zurrücksetzen"
+				(click)="resetPassword(newPasswordInput.value)"
+			>
+				Ändern
+			</button>
+		</mat-card-actions>
+	</mat-card>
 </div>
