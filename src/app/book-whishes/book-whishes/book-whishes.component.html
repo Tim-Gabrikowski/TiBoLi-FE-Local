@@ -1,0 +1,29 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		(click)="backToHome()"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Buchwünsche</span>
+	<mat-divider></mat-divider>
+</div>
+<div *ngIf="loading">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngFor="let whish of whishes">
+	<mat-card>
+		<mat-card-title>{{ whish.title }}</mat-card-title>
+		<mat-card-subtitle> {{ whish.author }} </mat-card-subtitle>
+		<mat-card-content> {{ whish.hint }} </mat-card-content>
+	</mat-card>
+</div>
+<div id="toggleFormButton">
+	<button mat-fab color="primary" (click)="toggleForm()">
+		<mat-icon>edit</mat-icon>
+	</button>
+</div>
+<div id="input-form" *ngIf="showForm">
+	<app-whish-form></app-whish-form>
+</div>

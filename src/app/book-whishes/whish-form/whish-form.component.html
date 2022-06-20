@@ -1,0 +1,43 @@
+<mat-card>
+	<mat-card-title>Ein Buch wünschen</mat-card-title>
+	<mat-card-subtitle>Bitte fülle diese Felder aus</mat-card-subtitle>
+	<mat-card-content>
+		<!--Titel-->
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Buchtitel</mat-label>
+			<input matInput placeholder="Mein Cooles Buch" #title />
+		</mat-form-field>
+		<!--Autor-->
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Buchautor</mat-label>
+			<input matInput placeholder="Cooler Autor" #author />
+		</mat-form-field>
+		<!--Informationen-->
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Weitere Informationen</mat-label>
+			<textarea
+				matInput
+				placeholder="Beispiel: ISBN, Thema, Klassenstufe"
+				#hint
+			></textarea>
+		</mat-form-field>
+		<!--Senden-->
+		<button
+			mat-flat-button
+			color="primary"
+			(click)="sendWhish(title.value, author.value, hint.value)"
+			*ngIf="!loading"
+		>
+			Senden
+		</button>
+		<button mat-flat-button color="primary" *ngIf="loading" disabled>
+			Senden
+		</button>
+	</mat-card-content>
+	<mat-card-footer>
+		<mat-progress-bar
+			mode="indeterminate"
+			*ngIf="loading"
+		></mat-progress-bar>
+	</mat-card-footer>
+</mat-card>

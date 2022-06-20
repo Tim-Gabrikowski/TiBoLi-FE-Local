@@ -1,0 +1,23 @@
+.font-a {
+	font-size: 20px;
+}
+mat-card {
+	margin-left: 20px;
+	margin-top: 20px;
+
+	width: 500px;
+	float: left;
+}
+#input-form {
+	position: fixed;
+	right: 20px;
+	bottom: 80px;
+	max-height: 500px;
+	width: 400px;
+	overflow: auto;
+}
+#toggleFormButton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}

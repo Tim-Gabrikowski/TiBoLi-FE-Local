@@ -12,6 +12,7 @@ import { BooksModule } from './books/books.module';
 import { CustomersModule } from './customers/customers.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { BookWhishesModule } from './book-whishes/book-whishes.module';
 
 //components:
 import { MessageComponent } from './message/message.component';
@@ -63,6 +64,7 @@ import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.mod
 		AppRoutingModule,
 		BooksModule,
 		CustomersModule,
+		BookWhishesModule,
 		HttpClientModule,
 		FormsModule,
 		BrowserAnimationsModule,
