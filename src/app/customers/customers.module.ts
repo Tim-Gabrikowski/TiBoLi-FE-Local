@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { AppModule } from '../app.module';
 import { PermGroupPipeModule } from '../pipes/perm-group-pipe/perm-group-pipe.module';
+import { ClassesComponent } from './classes/classes.component';
 
 @NgModule({
 	declarations: [
@@ -35,6 +36,7 @@ import { PermGroupPipeModule } from '../pipes/perm-group-pipe/perm-group-pipe.mo
 		CutomerEditComponent,
 		CustomerNewEditorComponent,
 		CustomerTransactionsComponent,
+		ClassesComponent,
 	],
 	imports: [
 		CommonModule,

@@ -5,6 +5,7 @@ import { IClass } from 'src/app/interfaces/class';
 import { ICustomer } from 'src/app/interfaces/customer';
 import { MessageService } from 'src/app/message.service';
 import { PdfService } from 'src/app/pdf.service';
+import { ClassesService } from '../../services/classes.service';
 import { CustomersService } from '../../services/customers.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class CutomerEditComponent implements OnInit {
 		private router: Router,
 		private pdfService: PdfService,
 		private messageService: MessageService,
-		private authService: AuthService
+		private authService: AuthService,
+		private classService: ClassesService
 	) {}
 
 	log(msg: string) {
@@ -33,7 +35,7 @@ export class CutomerEditComponent implements OnInit {
 	hide: boolean = true;
 
 	getClasses() {
-		this.customerService.getClasses().subscribe((classes) => {
+		this.classService.getClasses().subscribe((classes) => {
 			this.classes = classes;
 		});
 	}

@@ -1,0 +1,74 @@
+<div class="headBar">
+	<button
+		mat-icon-button
+		aria-label="Example icon button with a vertical three dot icon"
+		(click)="backToHome()"
+	>
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Klassen</span>
+	<mat-divider></mat-divider>
+</div>
+
+<table mat-table [dataSource]="classes" class="mat-elevation-z8 demo-table">
+	<!--ID-->
+	<ng-container matColumnDef="id">
+		<th mat-header-cell *matHeaderCellDef>id</th>
+		<td mat-cell *matCellDef="let element">{{ element.id }}</td>
+	</ng-container>
+	<!--Jahrgang-->
+	<ng-container matColumnDef="class">
+		<th mat-header-cell *matHeaderCellDef>Klasse</th>
+		<td mat-cell *matCellDef="let element">
+			{{ element.year }}{{ element.letter }}
+		</td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr
+		mat-row
+		(click)="onSelectClass(row.id)"
+		*matRowDef="let row; columns: displayedColumns"
+	></tr>
+</table>
+
+<button mat-fab color="primary" id="newEditorButton" (click)="openNewEditor()">
+	<mat-icon>add</mat-icon>
+</button>
+
+<mat-card id="editBox" *ngIf="editorOpen && classToEdit">
+	<mat-card-title *ngIf="edit">
+		Klasse {{ classToEdit!.year }}{{ classToEdit!.letter }} bearbeiten
+	</mat-card-title>
+	<mat-card-title *ngIf="!edit"> Klasse neu anlegen </mat-card-title>
+	<mat-card-content>
+		<mat-form-field appearance="fill">
+			<mat-label>Jahrgang</mat-label>
+			<input
+				placeholder="9"
+				matInput
+				#yearInput
+				value="{{ classToEdit!.year }}"
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label>Buchstabe</mat-label>
+			<input
+				placeholder="a"
+				matInput
+				#letterInput
+				value="{{ classToEdit!.letter }}"
+			/>
+		</mat-form-field>
+		<button
+			mat-flat-button
+			color="primary"
+			(click)="updateClass(yearInput.value, letterInput.value)"
+		>
+			Speichern
+		</button>
+	</mat-card-content>
+	<mat-card-footer *ngIf="savingClass">
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</mat-card-footer>
+</mat-card>

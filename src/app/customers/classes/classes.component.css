@@ -1,0 +1,52 @@
+.font-a {
+	font-size: 20px;
+}
+.btn {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.full {
+	height: 100%;
+	width: 100%;
+}
+.example-spacer {
+	flex: 1 1 auto;
+}
+
+#editBox {
+	position: fixed;
+	right: 20px;
+	bottom: 80px;
+	max-height: 500px;
+	width: 300px;
+	overflow: auto;
+}
+.demo-table {
+	width: 50%;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.mat-row .mat-cell {
+	border-bottom: 1px solid transparent;
+	border-top: 1px solid transparent;
+	cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+	border-color: currentColor;
+}
+.align-right {
+	text-align: right;
+}
+
+mat-form-field {
+	width: 280px;
+}
+#newEditorButton {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}

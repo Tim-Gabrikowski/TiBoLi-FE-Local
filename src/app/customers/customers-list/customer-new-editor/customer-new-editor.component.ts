@@ -4,6 +4,7 @@ import { IClass } from 'src/app/interfaces/class';
 import { ICustomer } from 'src/app/interfaces/customer';
 import { MessageService } from 'src/app/message.service';
 import { PdfService } from 'src/app/pdf.service';
+import { ClassesService } from '../../services/classes.service';
 import { CustomersService } from '../../services/customers.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class CustomerNewEditorComponent implements OnInit {
 		private customerService: CustomersService,
 		private router: Router,
 		private messageService: MessageService,
-		private pdfService: PdfService
+		private pdfService: PdfService,
+		private classService: ClassesService
 	) {}
 
 	ngOnInit(): void {
@@ -28,7 +30,7 @@ export class CustomerNewEditorComponent implements OnInit {
 	status: number = 0;
 
 	getClasses() {
-		this.customerService.getClasses().subscribe((classes) => {
+		this.classService.getClasses().subscribe((classes) => {
 			this.classes = classes;
 		});
 	}

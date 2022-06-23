@@ -13,6 +13,7 @@ import { BackComponent } from './transactions/back/back.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { APIDocumentationComponent } from './documentation/api-documentation/api-documentation.component';
 import { BookWhishesComponent } from './book-whishes/book-whishes/book-whishes.component';
+import { ClassesComponent } from './customers/classes/classes.component';
 
 const routes: Routes = [
 	{ path: 'books', component: BooksListComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
 	{ path: 'documentation', component: DocumentationComponent },
 	{ path: 'documentation/api', component: APIDocumentationComponent },
 	{ path: 'whish', component: BookWhishesComponent },
+	{ path: 'classes', component: ClassesComponent },
 ];
 
 @NgModule({

@@ -75,14 +75,7 @@ export class CustomersService {
 			this.log('Customer gespeichert');
 		});
 	}
-	getClasses(): Observable<IClass[]> {
-		return this.http
-			.get<IClass[]>(this.customersUrl + '/classes')
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<IClass[]>('get customer'))
-			);
-	}
+
 	newCustomer(
 		name: string | String,
 		lastname: string | String,
