@@ -2,29 +2,58 @@
 	<mat-card>
 		<mat-card-title>{{ book.title }} bearbeiten</mat-card-title>
 		<mat-card-content>
-			<mat-form-field appearance="fill" id="titleInput">
-				<mat-label>Titel:</mat-label>
-				<input matInput value="{{ book.title }}" #title />
-			</mat-form-field>
-
-			<mat-form-field appearance="fill" id="authorInput">
-				<mat-label>Autor:</mat-label>
-				<input matInput value="{{ book.author }}" #author />
-			</mat-form-field>
+			<form [formGroup]="BookCredentials">
+				<mat-form-field appearance="fill">
+					<mat-label>ISBN:</mat-label>
+					<input matInput formControlName="isbn" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Titel:</mat-label>
+					<input matInput formControlName="title" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Untertitel:</mat-label>
+					<input matInput formControlName="subtitle" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Autor:</mat-label>
+					<input matInput formControlName="author" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Verlag:</mat-label>
+					<input matInput formControlName="publisher" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Erscheinungsjahr:</mat-label>
+					<input matInput formControlName="year" />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Altersempfehlung:</mat-label>
+					<input matInput formControlName="age" />
+				</mat-form-field>
+			</form>
 		</mat-card-content>
 		<mat-card-actions align="end">
 			<button
 				mat-mini-fab
-				(click)="onSubmit(title.value, author.value)"
+				(click)="setToDefault()"
 				color="primary"
-				aria-label="Example icon button with a delete icon"
+				matTooltip="Zurrücksetzen"
+			>
+				<mat-icon>close</mat-icon>
+			</button>
+			<button
+				mat-mini-fab
+				(click)="onSubmit()"
+				color="primary"
+				matTooltip="Speichern"
 			>
 				<mat-icon>save</mat-icon>
 			</button>
 			<button
 				mat-mini-fab
 				(click)="deleteBook()"
-				aria-label="Example icon button with a delete icon"
+				matTooltip="Buch löschen"
 			>
 				<mat-icon>delete</mat-icon>
 			</button>

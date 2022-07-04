@@ -13,11 +13,40 @@ export class BookEditComponent implements OnInit {
 	constructor(private bookService: BookService, private router: Router) {}
 	@Input() book?: IBook;
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		var n = setInterval(() => {
+			if (this.book) {
+				clearInterval(n);
+				this.setToDefault();
+			}
+		});
+	}
 
-	onSubmit(title: string, author: string) {
-		this.book!.title = title;
-		this.book!.author = author;
+	BookCredentials = new FormGroup({
+		id: new FormControl(''),
+		title: new FormControl(''),
+		subtitle: new FormControl(''),
+		isbn: new FormControl(''),
+		author: new FormControl(''),
+		publisher: new FormControl(''),
+		year: new FormControl(''),
+		age: new FormControl(''),
+	});
+
+	setToDefault() {
+		this.BookCredentials.setValue({
+			id: this.book!.id,
+			title: this.book!.title,
+			subtitle: this.book!.subtitle,
+			author: this.book!.author,
+			isbn: this.book!.isbn,
+			publisher: this.book!.publisher,
+			year: this.book!.year,
+			age: this.book!.age,
+		});
+	}
+	onSubmit() {
+		this.book! = this.BookCredentials.value;
 		this.bookService.updateBook(this.book!);
 		this.router.navigate(['/books/' + this.book!.id + '/overview']);
 	}

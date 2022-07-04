@@ -5,6 +5,8 @@ import { ICopy } from 'src/app/interfaces/copy';
 import { PdfService } from 'src/app/pdf.service';
 import { BookService } from '../../services/book.service';
 
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
 	selector: 'app-new-book-editor',
 	templateUrl: './new-book-editor.component.html',
@@ -17,6 +19,48 @@ export class NewBookEditorComponent implements OnInit {
 		private pdfService: PdfService
 	) {}
 
+	//new:
+
+	loadingStuff: boolean = false;
+
+	isbnInputControl = new FormControl('');
+	BookCredentials = new FormGroup({
+		isbn: this.isbnInputControl,
+		title: new FormControl(''),
+		subtitle: new FormControl(''),
+		author: new FormControl(''),
+		publisher: new FormControl(''),
+		year: new FormControl(''),
+		age: new FormControl(''),
+	});
+	copyAmountInput = new FormControl('');
+	labelPositionInput = new FormControl('');
+
+	test() {
+		console.log(this.BookCredentials.value.isbn);
+		console.log(this.isbnInputControl.value);
+	}
+	searchISBN() {
+		var isbn = this.isbnInputControl.value;
+		this.loadingStuff = true;
+		console.log('get isbn data');
+		this.bookService.getIsbnData(isbn).subscribe((data: any) => {
+			console.log(data);
+			this.loadingStuff = false;
+			this.BookCredentials.patchValue({
+				title: data.title || '',
+				subtitle: data.subtitle || '',
+				author: data.authors[0].name || '',
+				publisher: data.publishers[0].name || '',
+				year: data.publish_date || '',
+			});
+		});
+	}
+	saveCredentials() {
+		var credentials = this.BookCredentials.value;
+	}
+
+	//old:
 	booksFoundByTitle: IBook[] = [];
 	booksFoundByAuthor: IBook[] = [];
 	newCopys: ICopy[] = [];
@@ -30,13 +74,15 @@ export class NewBookEditorComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	searchBooks(title: string, author: string) {
-		this.searchBooksByTitle(title);
-		this.searchBooksByAuthor(author);
+	searchBooks() {
+		this.searchBooksByTitle(this.BookCredentials.value.title);
+		// this.searchBooksByAuthor(this.BookCredentials.value.author);
 	}
 	searchBooksByTitle(title: string) {
+		this.loadingStuff = true;
 		this.bookService.searchBookByTitle(title).subscribe((books) => {
 			this.booksFoundByTitle = books;
+			this.loadingStuff = false;
 		});
 	}
 	searchBooksByAuthor(title: string) {
@@ -45,33 +91,39 @@ export class NewBookEditorComponent implements OnInit {
 		});
 	}
 
-	newBook(title: string, author: string) {
-		this.bookService.newBook(title, author, (id: Number) => {
+	newBook() {
+		this.loadingStuff = true;
+		this.bookService.newBook(this.BookCredentials.value, (id: Number) => {
 			this.bookCreated = true;
 			console.log(id);
-			this.setNewBook(title, author, id);
+			this.setNewBook(id);
 			console.log(this.newBookID);
+			this.loadingStuff = false;
 		});
 	}
-	setNewBook(title: string, author: string, id: number | Number) {
+	setNewBook(id: number | Number) {
 		this.bookCreated = true;
 
-		this.newBookTitle! = title;
-		this.newBookAuthor! = author;
+		this.newBookTitle! = this.BookCredentials.value.title;
+		this.newBookAuthor! = this.BookCredentials.value.author;
 		this.newBookID! = id;
 	}
-	newCopysToBook(bookID: Number | number, InAmount: string) {
-		var amount: number = Number(InAmount);
-		this.bookService.createCopies(bookID, amount).subscribe((copies) => {
-			this.newCopys = copies;
-		});
+	newCopysToBook() {
+		var amount: number = Number(this.copyAmountInput.value);
+		this.loadingStuff = true;
+		this.bookService
+			.createCopies(this.newBookID!, amount)
+			.subscribe((copies) => {
+				this.newCopys = copies;
+				this.loadingStuff = false;
+			});
 	}
 	reloadBookList() {
 		this.router.navigate(['/books/' + this.newBookID]);
 	}
-	getPdfOfBooks(startAt: string) {
+	getPdfOfBooks() {
 		var body = {
-			startAt: Number(startAt),
+			startAt: Number(this.labelPositionInput.value) || 0,
 			books: [{}],
 		};
 
@@ -88,9 +140,9 @@ export class NewBookEditorComponent implements OnInit {
 		body.books = books;
 		body.books.shift();
 		console.log(body);
-		this.loadLables = true;
+		this.loadingStuff = true;
 		this.pdfService.downloadBookPDF(body, () => {
-			this.loadLables = false;
+			this.loadingStuff = false;
 		});
 	}
 	defaultLabelPosition = 0;

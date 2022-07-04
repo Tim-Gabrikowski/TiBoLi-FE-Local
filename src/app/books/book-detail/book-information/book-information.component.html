@@ -4,12 +4,32 @@
 		<mat-card-content>{{ book.id }}</mat-card-content>
 	</mat-card>
 	<mat-card>
-		<mat-card-title>Title:</mat-card-title>
+		<mat-card-title>ISBN:</mat-card-title>
+		<mat-card-content>{{ book.isbn }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Titel:</mat-card-title>
 		<mat-card-content>{{ book.title }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Untertitel:</mat-card-title>
+		<mat-card-content>{{ book.subtitle }}</mat-card-content>
 	</mat-card>
 	<mat-card>
 		<mat-card-title>Autor:</mat-card-title>
 		<mat-card-content>{{ book.author }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Verlag:</mat-card-title>
+		<mat-card-content>{{ book.publisher }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Erscheinungsjahr:</mat-card-title>
+		<mat-card-content>{{ book.year }}</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Altersempfehlung:</mat-card-title>
+		<mat-card-content>{{ book.age }}</mat-card-content>
 	</mat-card>
 	<mat-card (click)="onClick()">
 		<mat-card-title>Exemplare:</mat-card-title>

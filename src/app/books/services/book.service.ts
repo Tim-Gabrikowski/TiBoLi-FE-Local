@@ -74,22 +74,12 @@ export class BookService {
 			this.log('Buch gespeichert');
 		});
 	}
-	newBook(
-		title: string | String,
-		author: string | String,
-		callback: Function
-	): void {
+	newBook(book: any, callback: Function): void {
 		this.log('Buch wird gespeichert...');
-		var req = this.http
-			.put(
-				this.booksUrl,
-				{ title: title, author: author },
-				this.httpOptions
-			)
-			.pipe(
-				tap((_) => this.log(`Buch speichern`)),
-				catchError(this.handleError<any>('updateBook'))
-			);
+		var req = this.http.put(this.booksUrl, book, this.httpOptions).pipe(
+			tap((_) => this.log(`Buch speichern`)),
+			catchError(this.handleError<any>('updateBook'))
+		);
 		req.subscribe((result) => {
 			callback(result.id);
 			this.log('Buch gespeichert');
@@ -137,6 +127,10 @@ export class BookService {
 		req.subscribe((result) => {
 			this.log('Buch gelöscht');
 		});
+	}
+	getIsbnData(isbn: string) {
+		var url = this.booksUrl + '/isbn/' + isbn;
+		return this.http.get(url, this.httpOptions);
 	}
 
 	//some magic to retry actions:

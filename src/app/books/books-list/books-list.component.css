@@ -26,8 +26,12 @@ app-book-list-item {
 }
 #newEditor {
 	position: fixed;
-	right: 20px;
-	bottom: 80px;
-	max-height: 500px;
-	overflow: auto;
+	right: 50%;
+	bottom: 50%;
+	transform: translate(50%, 50%);
+	height: 500px;
+	/* overflow: auto; */
+	width: 900px;
+
+	box-shadow: 5px 5px 18px 4px rgba(0, 0, 0, 0.46);
 }
