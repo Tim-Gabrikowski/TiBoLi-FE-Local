@@ -3,6 +3,7 @@ const handleError = require("./errorHandling");
 require("dotenv").config();
 const app = express();
 const port = process.env.BUILD_PORT || 8083;
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 var fs = require("fs");
 var util = require("util");
@@ -39,9 +40,14 @@ function getDate(space = true) {
 	}
 }
 
-const booksApiRouter = require(process.env.RELATIVE_PATH_TO_BACKEND_MODULE);
-
-app.use("/api", booksApiRouter);
+app.use(
+	"/api",
+	createProxyMiddleware({
+		target: "http://localhost:3005",
+		changeOrigin: true,
+		pathRewrite: { "^/api": "" },
+	})
+);
 
 app.use("/", express.static("dist/TiBoLi-FE-Local"));
 app.use("*", (req, res) => {
