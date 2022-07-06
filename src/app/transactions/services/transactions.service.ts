@@ -29,10 +29,7 @@ export class TransactionsService {
 		this.log('transactions werden geladen!');
 		return this.http
 			.get<ITransaction[]>(this.transactionsUrl)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<ITransaction[]>('get Books', []))
-			);
+			.pipe(catchError(this.handleError<ITransaction[]>('get Books')));
 	}
 	newTransactions(bNumber: number, mNumbers: number[], callback: Function) {
 		this.log('bücher ausleihen');
@@ -44,11 +41,8 @@ export class TransactionsService {
 					{ bNumber: bNumber, mNumber: num },
 					this.httpOptions
 				)
-				.pipe(
-					this.delayRetry(1000, 3),
-					tap((_) => this.log(`Buch leihen`)),
-					catchError(this.handleError<any>('lentBook'))
-				);
+				.pipe(catchError(this.handleError<any>('lentBook')));
+
 			req.subscribe((res) => {
 				if (res.status == 0) {
 					this.log('Buch ' + num + ' wurde ausgeliehen.');
@@ -66,11 +60,8 @@ export class TransactionsService {
 				{ mNumber: mNumber },
 				this.httpOptions
 			)
-			.pipe(
-				this.delayRetry(1000, 3),
-				tap((_) => this.log(`Buch zurrückgeben`)),
-				catchError(this.handleError<any>('backBook'))
-			);
+			.pipe(catchError(this.handleError<any>('backBook')));
+
 		req.subscribe((res) => {
 			if (res.status == 0) {
 				this.log(
@@ -84,11 +75,9 @@ export class TransactionsService {
 		return this.http
 			.get<ITransaction[]>(this.transactionsUrl + '/customer/' + num)
 			.pipe(
-				this.delayRetry(1000, 3),
 				catchError(
 					this.handleError<ITransaction[]>(
-						'get Transations from Customer',
-						[]
+						'get Transations from Customer'
 					)
 				)
 			);
@@ -101,11 +90,9 @@ export class TransactionsService {
 				this.transactionsUrl + '/customer/' + num + '/books'
 			)
 			.pipe(
-				this.delayRetry(1000, 3),
 				catchError(
 					this.handleError<ITransactionBook[]>(
-						'get Transations from Customer',
-						[]
+						'get Transations from Customer'
 					)
 				)
 			);
@@ -114,36 +101,16 @@ export class TransactionsService {
 	//error Handling
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
-			console.error(error);
-			this.log('something went wrong ' + error.message);
+			if (error.status == 401 || error.status == 403) {
+				this.messageService.add('Fehler! Kein Zugriff');
+			} else {
+				this.log('Ein Fehler ist aufgetreten ' + error.message);
+			}
 			return of(result as T);
 		};
 	}
 	//log to MessageService
 	log(message: string) {
 		this.messageService.add(message);
-	}
-
-	//some magic to retry actions:
-	delayRetry(delayMS: number, maxRetry: number) {
-		let retries = maxRetry;
-		return (src: Observable<any>) =>
-			src.pipe(
-				retryWhen((errors: Observable<any>) =>
-					errors.pipe(
-						delay(delayMS),
-						mergeMap((error) =>
-							retries-- > 0
-								? of(error)
-								: throwError({
-										message:
-											'Server hat auf ' +
-											(maxRetry + 1) +
-											' Nachrichten nicht geantwortet. Bitte versuche es später nochmal',
-								  })
-						)
-					)
-				)
-			);
 	}
 }

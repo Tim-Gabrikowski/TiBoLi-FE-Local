@@ -41,8 +41,12 @@ export class BookService {
 
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
-			console.error(error);
-			this.log('Bücher konnten nicht geladen werden ' + error.message);
+			if (error.status == 401 || error.status == 403) {
+				this.messageService.add('Fehler! Kein Zugriff');
+			} else {
+				this.log('Ein Fehler ist aufgetreten ' + error.message);
+			}
+
 			return of(result as T);
 		};
 	}
@@ -55,7 +59,6 @@ export class BookService {
 	}
 	getBook(id: Number): Observable<IBook[]> {
 		return this.http
-
 			.get<IBook[]>(this.booksUrl + '/' + id)
 			.pipe(catchError(this.handleError<IBook[]>('get Books')));
 	}
@@ -66,20 +69,20 @@ export class BookService {
 	}
 	updateBook(book: IBook): void {
 		this.log(' Buch wird gespeichert....');
-		var req = this.http.put(this.booksUrl, book, this.httpOptions).pipe(
-			tap((_) => this.log(`updated book id=${book.id}`)),
-			catchError(this.handleError<any>('updateBook'))
-		);
+		var req = this.http
+			.put(this.booksUrl, book, this.httpOptions)
+			.pipe(catchError(this.handleError<any>('updateBook')));
+
 		req.subscribe((result) => {
 			this.log('Buch gespeichert');
 		});
 	}
 	newBook(book: any, callback: Function): void {
 		this.log('Buch wird gespeichert...');
-		var req = this.http.put(this.booksUrl, book, this.httpOptions).pipe(
-			tap((_) => this.log(`Buch speichern`)),
-			catchError(this.handleError<any>('updateBook'))
-		);
+		var req = this.http
+			.put(this.booksUrl, book, this.httpOptions)
+			.pipe(catchError(this.handleError<any>('updateBook')));
+
 		req.subscribe((result) => {
 			callback(result.id);
 			this.log('Buch gespeichert');
@@ -111,48 +114,25 @@ export class BookService {
 				{ mNumber: mNumber, lifecycle: 5 },
 				this.httpOptions
 			)
-			.pipe(
-				tap((_) => this.log(`Exemplar löschen...`)),
-				catchError(this.handleError<any>('deleteCopy'))
-			);
+			.pipe(catchError(this.handleError<any>('deleteCopy')));
+
 		req.subscribe((result) => {
 			this.log('Exemplar gelöscht');
 		});
 	}
 	deleteBook(id: number | Number) {
-		var req = this.http.delete(this.booksUrl + '/' + id).pipe(
-			tap((_) => this.log(`delete Book`)),
-			catchError(this.handleError<any>('deleteBook'))
-		);
+		var req = this.http
+			.delete(this.booksUrl + '/' + id)
+			.pipe(catchError(this.handleError<any>('deleteBook')));
+
 		req.subscribe((result) => {
 			this.log('Buch gelöscht');
 		});
 	}
 	getIsbnData(isbn: string) {
 		var url = this.booksUrl + '/isbn/' + isbn;
-		return this.http.get(url, this.httpOptions);
-	}
-
-	//some magic to retry actions:
-	delayRetry(delayMS: number, maxRetry: number) {
-		let retries = maxRetry;
-		return (src: Observable<any>) =>
-			src.pipe(
-				retryWhen((errors: Observable<any>) =>
-					errors.pipe(
-						delay(delayMS),
-						mergeMap((error) =>
-							retries-- > 0
-								? of(error)
-								: throwError({
-										message:
-											'Server hat auf ' +
-											(maxRetry + 1) +
-											' Nachrichten nicht geantwortet. Bitte versuche es später nochmal',
-								  })
-						)
-					)
-				)
-			);
+		return this.http
+			.get(url, this.httpOptions)
+			.pipe(catchError(this.handleError<any>('deleteBook')));
 	}
 }

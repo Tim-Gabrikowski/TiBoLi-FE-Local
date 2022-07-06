@@ -60,36 +60,16 @@ export class PdfService {
 	//error Handling
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
-			console.error(error);
-			this.log('something went wrong ' + error.message);
+			if (error.status == 401 || error.status == 403) {
+				this.messageService.add('Fehler! Kein Zugriff');
+			} else {
+				this.log('Ein Fehler ist aufgetreten ' + error.message);
+			}
 			return of(result as T);
 		};
 	}
 	//log to MessageService
 	log(message: string) {
 		this.messageService.add(message);
-	}
-
-	//some magic to retry actions:
-	delayRetry(delayMS: number, maxRetry: number) {
-		let retries = maxRetry;
-		return (src: Observable<any>) =>
-			src.pipe(
-				retryWhen((errors: Observable<any>) =>
-					errors.pipe(
-						delay(delayMS),
-						mergeMap((error) =>
-							retries-- > 0
-								? of(error)
-								: throwError({
-										message:
-											'Server hat auf ' +
-											(maxRetry + 1) +
-											' Nachrichten nicht geantwortet. Bitte versuche es später nochmal',
-								  })
-						)
-					)
-				)
-			);
 	}
 }

@@ -13,6 +13,7 @@ import { TokenStorageService } from './token-storage.service';
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import { MessageService } from '../message.service';
 // const TOKEN_HEADER_KEY = 'Authorization';  // for Spring Boot back-end
 const TOKEN_HEADER_KEY = 'authorization'; // for Node.js Express back-end
 @Injectable()
@@ -22,8 +23,12 @@ export class AuthInterceptor implements HttpInterceptor {
 		new BehaviorSubject<any>(null);
 	constructor(
 		private tokenService: TokenStorageService,
-		private authService: AuthService
+		private authService: AuthService,
+		private messageService: MessageService
 	) {}
+	log(msg: string) {
+		this.messageService.add(msg);
+	}
 	intercept(
 		req: HttpRequest<any>,
 		next: HttpHandler
@@ -32,15 +37,22 @@ export class AuthInterceptor implements HttpInterceptor {
 		const token = this.tokenService.getToken();
 		if (token != null) {
 			authReq = this.addTokenHeader(req, token);
+		} else {
+			this.log('Nicht eingeloggt');
 		}
 		return next.handle(authReq).pipe(
 			catchError((error) => {
 				if (
 					error instanceof HttpErrorResponse &&
 					!authReq.url.includes('auth/login') &&
-					error.status === 403
+					error.status === 401
 				) {
-					return this.handle403Error(authReq, next);
+					console.log(error);
+					if (error.error.token) {
+						return this.handle403Error(authReq, next);
+					} else {
+						this.log('Nicht eingeloggt');
+					}
 				}
 				return throwError(error);
 			})

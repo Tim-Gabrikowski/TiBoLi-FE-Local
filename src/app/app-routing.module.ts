@@ -14,27 +14,82 @@ import { DocumentationComponent } from './documentation/documentation.component'
 import { APIDocumentationComponent } from './documentation/api-documentation/api-documentation.component';
 import { BookWhishesComponent } from './book-whishes/book-whishes/book-whishes.component';
 import { ClassesComponent } from './customers/classes/classes.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-	{ path: 'books', component: BooksListComponent },
-	{ path: 'books/:id', component: BookDetailComponent },
-	{ path: 'books/:id/:page', component: BookDetailComponent },
+	{
+		path: 'books',
+		component: BooksListComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 0 },
+	},
+	{
+		path: 'books/:id',
+		component: BookDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 0 },
+	},
+	{
+		path: 'books/:id/:page',
+		component: BookDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 0 },
+	},
 	{ path: '', component: HomeComponent },
 	{ path: 'home', component: HomeComponent },
-	{ path: 'customers', component: CustomersListComponent },
-	{ path: 'customers/:bNumber', component: CustomerDetailComponent },
-	{ path: 'customers/:bNumber/:page', component: CustomerDetailComponent },
-	{ path: 'transactions', component: TransactionsComponent },
-	{ path: 'transactions/lent/:random', component: LentComponent },
-	{ path: 'transactions/back', component: BackComponent },
-	{ path: 'documentation', component: DocumentationComponent },
-	{ path: 'documentation/api', component: APIDocumentationComponent },
-	{ path: 'whish', component: BookWhishesComponent },
-	{ path: 'classes', component: ClassesComponent },
+	{
+		path: 'customers',
+		component: CustomersListComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'customers/:bNumber',
+		component: CustomerDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'customers/:bNumber/:page',
+		component: CustomerDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'transactions',
+		component: TransactionsComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'transactions/lent/:random',
+		component: LentComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'transactions/back',
+		component: BackComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
+	{
+		path: 'whish',
+		component: BookWhishesComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 0 },
+	},
+	{
+		path: 'classes',
+		component: ClassesComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 3 },
+	},
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
+	providers: [AuthGuard],
 })
 export class AppRoutingModule {}

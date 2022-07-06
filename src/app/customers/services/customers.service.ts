@@ -41,36 +41,24 @@ export class CustomersService {
 	getCustomers(): Observable<ICustomer[]> {
 		return this.http
 			.get<ICustomer[]>(this.customersUrl)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<ICustomer[]>('get customers', []))
-			);
+			.pipe(catchError(this.handleError<ICustomer[]>('get customers')));
 	}
 	getCustomer(id: number | Number): Observable<ICustomer[]> {
 		return this.http
 			.get<ICustomer[]>(this.customersUrl + '/' + id)
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<ICustomer[]>('get customer'))
-			);
+			.pipe(catchError(this.handleError<ICustomer[]>('get customer')));
 	}
 	getCustomerWithClass(id: number | Number): Observable<ICustomer> {
 		return this.http
 			.get<ICustomer>(this.customersUrl + '/' + id + '/class')
-			.pipe(
-				this.delayRetry(1000, 3),
-				catchError(this.handleError<ICustomer>('get customer'))
-			);
+			.pipe(catchError(this.handleError<ICustomer>('get customer')));
 	}
 	editCustomer(customer: ICustomer) {
 		this.log(' Nutzer wird gespeichert....');
 		var req = this.http
 			.put(this.customersUrl, customer, this.httpOptions)
-			.pipe(
-				this.delayRetry(1000, 3),
-				tap((_) => this.log(`updated customer id = ${customer.id}`)),
-				catchError(this.handleError<any>('updateCustomer'))
-			);
+			.pipe(catchError(this.handleError<any>('updateCustomer')));
+
 		req.subscribe((result) => {
 			this.log('Customer gespeichert');
 		});
@@ -89,11 +77,8 @@ export class CustomersService {
 				{ name: name, lastname: lastname, classId: classId },
 				this.httpOptions
 			)
-			.pipe(
-				this.delayRetry(1000, 3),
-				tap((_) => this.log(`Nutzer speichern`)),
-				catchError(this.handleError<any>('updateCustomer'))
-			);
+			.pipe(catchError(this.handleError<any>('updateCustomer')));
+
 		req.subscribe((result) => {
 			callback(result);
 			this.log('Nutzer gespeichert');
@@ -101,11 +86,10 @@ export class CustomersService {
 	}
 	deleteCustomer(id: number | Number) {
 		this.log('Nutzer wird gelöscht...');
-		var req = this.http.delete(this.customersUrl + '/' + id).pipe(
-			this.delayRetry(1000, 3),
-			tap((_) => this.log(`Nutzer löschen`)),
-			catchError(this.handleError<any>('deleteCustomer'))
-		);
+		var req = this.http
+			.delete(this.customersUrl + '/' + id)
+			.pipe(catchError(this.handleError<any>('deleteCustomer')));
+
 		req.subscribe((result) => {
 			this.log('Nutzer gelöscht');
 		});
@@ -114,30 +98,12 @@ export class CustomersService {
 	//Errorhandling & stuff:
 	private handleError<T>(operator = 'operator', result?: T) {
 		return (error: any): Observable<T> => {
-			console.error(error);
-			this.log('Bücher konnten nicht geladen werden ' + error.message);
+			if (error.status == 401 || error.status == 403) {
+				this.messageService.add('Fehler! Kein Zugriff');
+			} else {
+				this.log('Ein Fehler ist aufgetreten ' + error.message);
+			}
 			return of(result as T);
 		};
-	}
-	delayRetry(delayMS: number, maxRetry: number) {
-		let retries = maxRetry;
-		return (src: Observable<any>) =>
-			src.pipe(
-				retryWhen((errors: Observable<any>) =>
-					errors.pipe(
-						delay(delayMS),
-						mergeMap((error) =>
-							retries-- > 0
-								? of(error)
-								: throwError({
-										message:
-											'Server hat auf ' +
-											(maxRetry + 1) +
-											' Nachrichten nicht geantwortet. Bitte versuche es später nochmal',
-								  })
-						)
-					)
-				)
-			);
 	}
 }
