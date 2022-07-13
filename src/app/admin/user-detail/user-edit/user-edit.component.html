@@ -1,0 +1,124 @@
+<div *ngIf="user">
+	<!-- Change username  -->
+	<mat-card>
+		<mat-card-title>Nutzername ändern</mat-card-title>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Nutzername:</mat-label>
+				<input matInput [formControl]="usernameControl" />
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button
+				mat-mini-fab
+				(click)="saveUsername()"
+				color="primary"
+				matTooltip="Speichern"
+			>
+				<mat-icon>save</mat-icon>
+			</button>
+		</mat-card-actions>
+		<mat-card-footer *ngIf="loading[0]">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-card-footer>
+	</mat-card>
+	<!-- Reset Password  -->
+	<mat-card>
+		<mat-card-title>Passwort zurrücksetzen</mat-card-title>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Neues Passwort:</mat-label>
+				<input
+					matInput
+					[formControl]="passwordControl"
+					[type]="hide ? 'password' : 'text'"
+				/>
+				<!-- toggle visibility  -->
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+			</mat-form-field>
+			<button
+				mat-flat-button
+				color="primary"
+				(click)="randomPassword()"
+				matTooltip="zufälliges Password generieren"
+			>
+				Passwort generieren
+			</button>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button
+				mat-mini-fab
+				(click)="savePassword()"
+				color="primary"
+				matTooltip="Speichern"
+			>
+				<mat-icon>save</mat-icon>
+			</button>
+		</mat-card-actions>
+		<mat-card-footer *ngIf="loading[1]">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-card-footer>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Berechtigung anpassen</mat-card-title>
+		<mat-card-content>
+			<mat-form-field appearance="fill">
+				<mat-label>Berechtigung</mat-label>
+				<mat-select
+					name="permission"
+					[(value)]="user!.perm_group"
+					#perms
+				>
+					<mat-option
+						*ngFor="let group of permGroups"
+						[value]="group"
+					>
+						{{ group | permGroup }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions align="end">
+			<button
+				mat-mini-fab
+				color="primary"
+				(click)="updatePermission()"
+				matTooltip="Speichern"
+			>
+				<mat-icon>save</mat-icon>
+			</button>
+		</mat-card-actions>
+		<mat-card-footer *ngIf="loading[2]">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-card-footer>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Benutzerkonto löschen</mat-card-title>
+		<mat-card-content>
+			Um das Konto zu löschen tippen sie: <br />
+			{{ deletePhrase }} <br />
+			<mat-form-field appearance="fill">
+				<mat-label>Bestätigungstext:</mat-label>
+				<input matInput [formControl]="deleteConfirmControl" />
+			</mat-form-field>
+			<button
+				mat-flat-button
+				color="warn"
+				matTooltip="Konto permanent löschen. DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN"
+				(click)="deleteAccount()"
+			>
+				Konto löschen
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>

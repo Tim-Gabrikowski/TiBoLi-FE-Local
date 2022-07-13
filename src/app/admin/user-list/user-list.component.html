@@ -1,22 +1,19 @@
 <div class="headBar">
-	<button
-		mat-icon-button
-		aria-label="Example icon button with a vertical three dot icon"
-		(click)="backToHome()"
-	>
+	<button mat-icon-button (click)="backToHome()">
 		<mat-icon>arrow_back_ios</mat-icon>
 	</button>
-	<span class="font-a">My Books</span>
+	<span class="font-a">Userlist</span>
 	<mat-divider></mat-divider>
 </div>
+
 <div class="searchMenu">
 	<mat-form-field appearance="fill">
 		<mat-label>Suchen</mat-label>
-		<input placeholder="z.B. Artemis" matInput #searchterm />
+		<input placeholder="'#' to search for group" matInput #searchterm />
 	</mat-form-field>
 	<button
 		mat-icon-button
-		(click)="searchBook(searchterm.value)"
+		(click)="searchUsers(searchterm.value)"
 		matTooltip="Suchen"
 	>
 		<mat-icon>search</mat-icon>
@@ -29,26 +26,24 @@
 		<mat-icon>cancel</mat-icon>
 	</button>
 </div>
-<div *ngIf="books.length == 0">
-	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
-<!--if not searched-->
+
 <mat-action-list *ngIf="searched == false">
-	<mat-list-item *ngFor="let book of books" role="listitem">
-		<app-book-list-item [book]="book"></app-book-list-item>
+	<mat-list-item *ngFor="let user of users" role="listitem">
+		<admin-user-list-item [user]="user"></admin-user-list-item>
 	</mat-list-item>
 </mat-action-list>
-<!--if searched-->
+
 <mat-action-list *ngIf="searched == true">
-	<mat-list-item *ngFor="let book of filteredBooks" role="listitem">
-		<app-book-list-item [book]="book"></app-book-list-item>
+	<mat-list-item *ngFor="let user of filteredUsers" role="listitem">
+		<admin-user-list-item [user]="user"></admin-user-list-item>
 	</mat-list-item>
 </mat-action-list>
+
 <div id="newButton">
 	<button mat-fab color="primary" (click)="toggleNewEditor()">
 		<mat-icon>edit</mat-icon>
 	</button>
 </div>
 <div *ngIf="newEditor" id="newEditor">
-	<app-new-book-editor></app-new-book-editor>
+	<admin-user-new-editor (events)="onEvent($event)"></admin-user-new-editor>
 </div>

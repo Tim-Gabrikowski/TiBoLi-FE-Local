@@ -121,7 +121,7 @@
 			</mat-form-field>
 			<!--perm_group-->
 			<mat-form-field appearance="fill">
-				<mat-label>Kartenposition</mat-label>
+				<mat-label>Berechtigung</mat-label>
 				<mat-select name="permission" [(value)]="defaultPerm" #perms>
 					<mat-option
 						*ngFor="let group of permGroups"
@@ -153,7 +153,25 @@
 	<mat-card *ngIf="customer!.user">
 		<mat-card-title>Kundenkonto bearbeiten</mat-card-title>
 		<mat-card-content>
-			Nutzername: {{ customer!.user!.username }} <br />
+			<mat-form-field appearance="fill" id="passwordInput">
+				<mat-label>altes Passwort</mat-label>
+				<input
+					matInput
+					[type]="hide ? 'password' : 'text'"
+					#oldPasswordInput
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+			</mat-form-field>
 			<!--password-->
 			<mat-form-field appearance="fill" id="passwordInput">
 				<mat-label>neues Passwort</mat-label>
@@ -181,7 +199,12 @@
 				mat-flat-button
 				color="primary"
 				matTooltip="Passwort zurrücksetzen"
-				(click)="resetPassword(newPasswordInput.value)"
+				(click)="
+					resetPassword(
+						oldPasswordInput.value,
+						newPasswordInput.value
+					)
+				"
 			>
 				Ändern
 			</button>

@@ -1,0 +1,14 @@
+<div *ngIf="user" class="full">
+	<button
+		class="btn"
+		Mat-list-item
+		color="primary"
+		type="button"
+		(click)="onSelect()"
+	>
+		<span class="name">({{ user.perm_group | permGroup }}) </span>
+		<span class="name"> {{ user.username }} </span>
+	</button>
+
+	<mat-divider></mat-divider>
+</div>

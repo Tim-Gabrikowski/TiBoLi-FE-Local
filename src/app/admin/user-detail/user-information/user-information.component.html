@@ -1,0 +1,26 @@
+<div *ngIf="user">
+	<mat-card>
+		<mat-card-title>ID:</mat-card-title>
+		<mat-card-content>
+			{{ user.id }}
+		</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Nutzername:</mat-card-title>
+		<mat-card-content>
+			{{ user.username }}
+		</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Rolle:</mat-card-title>
+		<mat-card-content>
+			{{ user.perm_group | permGroup }}
+		</mat-card-content>
+	</mat-card>
+	<mat-card *ngIf="user!.customer">
+		<mat-card-title>Kunde:</mat-card-title>
+		<mat-card-content>
+			{{ user.customer.name }} {{ user.customer.lastname }}
+		</mat-card-content>
+	</mat-card>
+</div>

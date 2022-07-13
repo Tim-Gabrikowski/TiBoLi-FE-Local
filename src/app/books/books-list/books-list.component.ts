@@ -28,17 +28,6 @@ export class BooksListComponent implements OnInit {
 	searched: boolean = false;
 	newEditor: boolean = false;
 
-	searchOptions: searchOption[] = [
-		{
-			id: 0,
-			description: 'Titel',
-		},
-		{
-			id: 1,
-			description: 'Autor',
-		},
-	];
-
 	getBooks(): void {
 		this.bookService.getBooks().subscribe((books) => {
 			this.books = books;

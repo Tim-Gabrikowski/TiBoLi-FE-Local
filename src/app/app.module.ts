@@ -13,6 +13,8 @@ import { CustomersModule } from './customers/customers.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { BookWhishesModule } from './book-whishes/book-whishes.module';
+import { AdminModule } from './admin/admin.module';
+import { RouterModule } from '@angular/router';
 
 //components:
 import { MessageComponent } from './message/message.component';
@@ -61,9 +63,11 @@ import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.mod
 	],
 	imports: [
 		BrowserModule,
+		RouterModule,
 		AppRoutingModule,
 		BooksModule,
 		CustomersModule,
+		AdminModule,
 		BookWhishesModule,
 		HttpClientModule,
 		FormsModule,

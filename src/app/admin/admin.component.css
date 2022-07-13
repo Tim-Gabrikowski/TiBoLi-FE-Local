@@ -1,0 +1,16 @@
+h2 {
+	margin-left: 20px;
+}
+.font-a {
+	font-size: 20px;
+}
+.btn {
+	margin-top: 20px;
+}
+
+mat-card {
+	margin-left: 20px;
+	margin-top: 10px;
+	height: 100px;
+	width: 300px;
+}

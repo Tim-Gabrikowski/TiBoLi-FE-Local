@@ -15,6 +15,9 @@ import { APIDocumentationComponent } from './documentation/api-documentation/api
 import { BookWhishesComponent } from './book-whishes/book-whishes/book-whishes.component';
 import { ClassesComponent } from './customers/classes/classes.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AdminComponent } from './admin/admin.component';
+import { AdminUserListComponent } from './admin/user-list/user-list.component';
+import { AdminUserDetailComponent } from './admin/user-detail/user-detail.component';
 
 const routes: Routes = [
 	{
@@ -84,6 +87,30 @@ const routes: Routes = [
 		component: ClassesComponent,
 		canActivate: [AuthGuard],
 		data: { perm_group: 3 },
+	},
+	{
+		path: 'admin',
+		component: AdminComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 4 },
+	},
+	{
+		path: 'admin/users',
+		component: AdminUserListComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 4 },
+	},
+	{
+		path: 'admin/users/:id',
+		component: AdminUserDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 4 },
+	},
+	{
+		path: 'admin/users/:id/:page',
+		component: AdminUserDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 4 },
 	},
 ];
 

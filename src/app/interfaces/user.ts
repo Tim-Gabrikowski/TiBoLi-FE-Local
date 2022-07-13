@@ -1,6 +1,9 @@
+import { ICustomer } from './customer';
+
 export interface IUser {
-	id: Number;
+	id: number;
 	username: String;
-	perm_group: Number;
-	customerId: Number;
+	perm_group: number;
+	customerId: number;
+	customer?: ICustomer;
 }

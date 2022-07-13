@@ -6,8 +6,9 @@
 		type="button"
 		(click)="onSelectBook(book)"
 	>
-		<span class="name">{{ book.title }} - </span>
-		<span class="author">{{ book.author }}</span>
+		<span class="name">{{ book.title }} </span>
+		<span class="name" *ngIf="book.subtitle">({{ book.subtitle }}) </span>
+		<span class="author">- {{ book.author }}</span>
 	</button>
 
 	<mat-divider></mat-divider>

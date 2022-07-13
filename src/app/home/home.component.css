@@ -4,6 +4,7 @@ mat-grid-tile {
 mat-card {
 	width: 500px;
 	margin: 20px;
+	float: left;
 }
 .btn {
 	margin-top: 20px;

@@ -1,0 +1,52 @@
+<mat-card>
+	<mat-card-title>Neues Nutzerkonto anlegen</mat-card-title>
+	<mat-card-content>
+		<form [formGroup]="inputElements">
+			<mat-form-field appearance="fill">
+				<mat-label>Nutzername</mat-label>
+				<input
+					placeholder="z.B. user123"
+					formControlName="username"
+					matInput
+				/>
+			</mat-form-field>
+			<mat-form-field appearance="fill" id="passwordInput">
+				<mat-label>Passwort</mat-label>
+				<input
+					matInput
+					[type]="hide ? 'password' : 'text'"
+					formControlName="password"
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon>{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+			</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Berechtigung</mat-label>
+				<mat-select
+					name="permission"
+					[(value)]="defaultPerm"
+					formControlName="perm_group"
+				>
+					<mat-option
+						*ngFor="let group of permGroups"
+						[value]="group"
+					>
+						{{ group | permGroup }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</form>
+		<button mat-flat-button color="primary" (click)="registerUser()">
+			Nutzerkonto anlegen
+		</button>
+	</mat-card-content>
+</mat-card>

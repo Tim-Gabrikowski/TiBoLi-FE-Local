@@ -54,10 +54,14 @@ export class AuthService {
 			httpOptions
 		);
 	}
-	resetPassword(username: string, password: string) {
+	resetPassword(id: number, oldPassword: string, newPassword: string) {
 		return this.http.put(
 			AUTH_API + '/reset',
-			{ username: username, newPassword: password },
+			{
+				id: id,
+				newPassword: newPassword,
+				oldPassword: oldPassword,
+			},
 			httpOptions
 		);
 	}

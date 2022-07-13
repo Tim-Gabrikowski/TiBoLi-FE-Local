@@ -1,0 +1,13 @@
+.btn {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.full {
+	height: 100%;
+	width: 100%;
+}
+.example-spacer {
+	flex: 1 1 auto;
+}

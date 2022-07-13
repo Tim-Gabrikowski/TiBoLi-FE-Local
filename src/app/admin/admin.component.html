@@ -1,0 +1,23 @@
+<div class="headBar">
+	<button mat-icon-button (click)="backToHome()">
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Admin area</span>
+	<mat-divider></mat-divider>
+</div>
+
+<mat-card>
+	<mat-card-title>Nutzerkonten</mat-card-title>
+	<mat-card-content>
+		<span>Nutzerkonten ansehen und bearbeiten</span>
+		<nav class="btn">
+			<button
+				mat-flat-button
+				color="accent"
+				(click)="openSubPage('users')"
+			>
+				Öffnen
+			</button>
+		</nav>
+	</mat-card-content>
+</mat-card>

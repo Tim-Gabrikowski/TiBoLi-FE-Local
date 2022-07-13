@@ -1,0 +1,27 @@
+<div class="headBar">
+	<button mat-icon-button (click)="backToList()">
+		<mat-icon>arrow_back_ios</mat-icon>
+	</button>
+	<span class="font-a">Userdetails </span>
+	<span class="font-a" *ngIf="user">({{ user!.username }})</span>
+	<mat-divider></mat-divider>
+</div>
+
+<mat-tab-group
+	#tabGroup
+	(selectedTabChange)="selectedTabChange($event)"
+	*ngIf="user"
+>
+	<mat-tab label="Overview">
+		<admin-user-information [user]="user!"></admin-user-information>
+	</mat-tab>
+	<mat-tab label="Bearbeiten">
+		<admin-user-edit
+			[user]="user!"
+			(events)="onEvent($event)"
+		></admin-user-edit>
+	</mat-tab>
+</mat-tab-group>
+<div *ngIf="!user">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
