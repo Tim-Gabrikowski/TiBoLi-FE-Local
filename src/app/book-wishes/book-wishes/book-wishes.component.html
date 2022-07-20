@@ -12,11 +12,11 @@
 <div *ngIf="loading">
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div *ngFor="let whish of whishes">
+<div *ngFor="let wish of wishes">
 	<mat-card>
-		<mat-card-title>{{ whish.title }}</mat-card-title>
-		<mat-card-subtitle> {{ whish.author }} </mat-card-subtitle>
-		<mat-card-content> {{ whish.hint }} </mat-card-content>
+		<mat-card-title>{{ wish.title }}</mat-card-title>
+		<mat-card-subtitle> {{ wish.author }} </mat-card-subtitle>
+		<mat-card-content> {{ wish.hint }} </mat-card-content>
 	</mat-card>
 </div>
 <div id="toggleFormButton">
@@ -25,5 +25,5 @@
 	</button>
 </div>
 <div id="input-form" *ngIf="showForm">
-	<app-whish-form></app-whish-form>
+	<app-wish-form></app-wish-form>
 </div>

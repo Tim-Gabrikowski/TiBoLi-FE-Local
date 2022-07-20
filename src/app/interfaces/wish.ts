@@ -1,4 +1,4 @@
-export interface IWhish {
+export interface IWish {
 	id: number;
 	title: string;
 	author: string;

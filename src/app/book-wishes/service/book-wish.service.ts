@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IWhish } from 'src/app/interfaces/whish';
-const WHISH_API = environment.apiUrl + '/whish';
+import { IWish } from 'src/app/interfaces/wish';
+const WHISH_API = environment.apiUrl + '/wish';
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 	body: {},
@@ -12,13 +12,13 @@ const httpOptions = {
 @Injectable({
 	providedIn: 'root',
 })
-export class BookWhishService {
+export class BookWishService {
 	constructor(private http: HttpClient) {}
 
-	getWhishes(): Observable<IWhish[]> {
-		return this.http.get<IWhish[]>(WHISH_API, httpOptions);
+	getWishes(): Observable<IWish[]> {
+		return this.http.get<IWish[]>(WHISH_API, httpOptions);
 	}
-	postWhish(whish: any) {
-		return this.http.post(WHISH_API, whish, httpOptions);
+	postWish(wish: any) {
+		return this.http.post(WHISH_API, wish, httpOptions);
 	}
 }

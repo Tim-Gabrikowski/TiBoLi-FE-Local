@@ -12,7 +12,7 @@ import { LentComponent } from './transactions/lent/lent.component';
 import { BackComponent } from './transactions/back/back.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { APIDocumentationComponent } from './documentation/api-documentation/api-documentation.component';
-import { BookWhishesComponent } from './book-whishes/book-whishes/book-whishes.component';
+import { BookWishesComponent } from './book-wishes/book-wishes/book-wishes.component';
 import { ClassesComponent } from './customers/classes/classes.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
@@ -77,8 +77,8 @@ const routes: Routes = [
 		data: { perm_group: 3 },
 	},
 	{
-		path: 'whish',
-		component: BookWhishesComponent,
+		path: 'wish',
+		component: BookWishesComponent,
 		canActivate: [AuthGuard],
 		data: { perm_group: 0 },
 	},

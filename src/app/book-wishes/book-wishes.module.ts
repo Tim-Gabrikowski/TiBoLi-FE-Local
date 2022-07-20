@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookWhishesComponent } from './book-whishes/book-whishes.component';
+import { BookWishesComponent } from './book-wishes/book-wishes.component';
 
 //materials:
 import { MatIconModule } from '@angular/material/icon';
@@ -11,10 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { WhishFormComponent } from './whish-form/whish-form.component';
+import { WishFormComponent } from './wish-form/wish-form.component';
 
 @NgModule({
-	declarations: [BookWhishesComponent, WhishFormComponent],
+	declarations: [BookWishesComponent, WishFormComponent],
 	imports: [
 		CommonModule,
 		MatIconModule,
@@ -26,6 +26,6 @@ import { WhishFormComponent } from './whish-form/whish-form.component';
 		MatTooltipModule,
 		MatProgressBarModule,
 	],
-	exports: [BookWhishesComponent],
+	exports: [BookWishesComponent],
 })
-export class BookWhishesModule {}
+export class BookWishesModule {}
