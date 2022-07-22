@@ -18,6 +18,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminUserListComponent } from './admin/user-list/user-list.component';
 import { AdminUserDetailComponent } from './admin/user-detail/user-detail.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 const routes: Routes = [
 	{
@@ -109,6 +110,12 @@ const routes: Routes = [
 	{
 		path: 'admin/users/:id/:page',
 		component: AdminUserDetailComponent,
+		canActivate: [AuthGuard],
+		data: { perm_group: 4 },
+	},
+	{
+		path: 'admin/settings',
+		component: SettingsComponent,
 		canActivate: [AuthGuard],
 		data: { perm_group: 4 },
 	},

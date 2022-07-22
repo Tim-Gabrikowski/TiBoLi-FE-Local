@@ -24,6 +24,7 @@ import { AdminUserDetailComponent } from './user-detail/user-detail.component';
 import { UserInformationComponent } from './user-detail/user-information/user-information.component';
 import { UserEditComponent } from './user-detail/user-edit/user-edit.component';
 import { UserNewEditorComponent } from './user-list/user-new-editor/user-new-editor.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { UserNewEditorComponent } from './user-list/user-new-editor/user-new-edi
 		UserInformationComponent,
 		UserEditComponent,
   UserNewEditorComponent,
+  SettingsComponent,
 	],
 	imports: [
 		CommonModule,

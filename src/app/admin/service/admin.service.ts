@@ -111,4 +111,15 @@ export class AdminService {
 			.post<IUser>(this.authUrl + '/register', newUser, this.httpOptions)
 			.pipe(catchError(this.handleError<IUser>('registerUser')));
 	}
+	getWorkingMode() {
+		console.log('getWorkingMode');
+		return this.http
+			.get(this.adminUrl + '/setting/workMode', this.httpOptions)
+			.pipe(catchError(this.handleError('getField')));
+	}
+	setKeyValue(objet: any) {
+		return this.http
+			.put(this.adminUrl + '/setting', objet, this.httpOptions)
+			.pipe(catchError(this.handleError('setField')));
+	}
 }

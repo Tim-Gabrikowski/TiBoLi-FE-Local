@@ -20,8 +20,11 @@
 	</mat-toolbar>
 </p>
 
-<!--Router bzw. content-->
-<router-outlet></router-outlet>
+<div *ngIf="!workMode">
+	<!--Router bzw. content-->
+	<router-outlet></router-outlet>
+</div>
+<div *ngIf="workMode">WIR ARBEITEN!</div>
 
 <div *ngIf="showLogin">
 	<div id="loginContainer">
