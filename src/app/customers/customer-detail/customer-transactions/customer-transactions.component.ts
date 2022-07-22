@@ -21,6 +21,7 @@ export class CustomerTransactionsComponent implements OnInit {
 		'mNumber',
 		'lentdate',
 		'backdate',
+		'maxBack',
 	];
 
 	ngOnInit(): void {}

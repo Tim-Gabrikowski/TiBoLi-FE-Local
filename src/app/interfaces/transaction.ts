@@ -4,4 +4,5 @@ export interface ITransaction {
 	mNumber: number;
 	lentDate: number;
 	backDate: number | null;
+	maxBack: number;
 }

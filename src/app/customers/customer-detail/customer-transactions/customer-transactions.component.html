@@ -41,6 +41,12 @@
 				{{ element.backDate | unixToDateString }}
 			</td>
 		</ng-container>
+		<ng-container matColumnDef="maxBack">
+			<th mat-header-cell *matHeaderCellDef>Frist</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.maxBack | unixToDateString }}
+			</td>
+		</ng-container>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
