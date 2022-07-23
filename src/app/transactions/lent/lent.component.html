@@ -3,33 +3,50 @@
 		<ng-template matStepLabel>Benutzer auswählen</ng-template>
 		<mat-form-field appearance="fill">
 			<mat-label>Benutzernummer</mat-label>
-			<input matInput placeholder="z.b. 11111" #bNumberInput />
+			<input
+				matInput
+				placeholder="z.b. 11111"
+				[formControl]="customerInput"
+				[matAutocomplete]="auto"
+			/>
+			<mat-autocomplete #auto="matAutocomplete">
+				<mat-option
+					*ngFor="let customer of filteredCustomers | async"
+					[value]="customer.id"
+				>
+					{{ customer.name }} {{ customer.lastname }}
+					<span *ngIf="customer.class">
+						({{ customer.class!.year }}{{ customer.class!.letter }})
+					</span>
+				</mat-option>
+			</mat-autocomplete>
 		</mat-form-field>
 		<br />
-		<button
-			mat-button
-			matStepperNext
-			(click)="setCustomerNumber(bNumberInput.value)"
-		>
+		<button mat-button matStepperNext (click)="setCustomerNumber()">
 			Next
 		</button>
 	</mat-step>
 	<mat-step>
 		<ng-template matStepLabel>Bücher auswählen</ng-template>
+
 		<mat-form-field appearance="fill">
 			<mat-label>Mediennummer</mat-label>
 			<input matInput placeholder="z.b. 111111111" #mNumberInput />
 		</mat-form-field>
+
 		<button mat-button (click)="addBook(mNumberInput.value)">
 			Hinzufügen
 		</button>
+
 		<div>
 			Ausgewählte Bücher:
 			<div *ngFor="let book of books">
 				{{ book.mNumber }}
 			</div>
 		</div>
+
 		<br />
+
 		<button mat-button matStepperNext>Next</button>
 	</mat-step>
 	<mat-step>

@@ -44,6 +44,7 @@ import { LoginComponent } from './login/login.component';
 import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.module';
 import { PipesModuleModule } from './pipes-module/pipes-module.module';
 import { ExtendComponent } from './transactions/extend/extend.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
 	declarations: [
@@ -92,6 +93,7 @@ import { ExtendComponent } from './transactions/extend/extend.component';
 		MatProgressBarModule,
 		PermGroupPipeModule,
 		PipesModuleModule,
+		MatAutocompleteModule,
 	],
 	providers: [authInterceptorProviders],
 	bootstrap: [AppComponent],
