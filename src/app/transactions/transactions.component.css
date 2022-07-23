@@ -3,6 +3,13 @@
 }
 mat-card {
 	width: 300px;
-	margin: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+div.row {
 	float: left;
+	padding: 0px;
+	margin: 0px;
 }

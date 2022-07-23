@@ -30,7 +30,7 @@ export class AppComponent {
 		console.log('Production?', environment.production);
 		this.showLogin = !this.getLoggedIn();
 		console.log('onINIT - getWorkingMode');
-		this.adminService.getWorkingMode().subscribe((res: any) => {
+		this.adminService.getKeyValue('workMode').subscribe((res: any) => {
 			console.log(res);
 			if (res.value == 'true' && this.getUserPerm() != 4) {
 				this.workMode = true;

@@ -11,18 +11,29 @@ import { AdminService } from '../service/admin.service';
 export class SettingsComponent implements OnInit {
 	constructor(private router: Router, private adminService: AdminService) {}
 
+	keys = ['workMode', 'maxLentTime'];
+
+	settingsControls = [new FormControl(''), new FormControl('')];
+	kvObjects: any = [{ id: 0, key: '', value: '' }];
+	loading: boolean[] = [false, false];
+
 	ngOnInit(): void {
-		this.adminService.getWorkingMode().subscribe((res: any) => {
-			console.log(res);
-			this.kvObjects[0] = res;
-			this.settingsControls[0].setValue(
-				this.kvObjects[0].value == 'true' ? 1 : 0
-			);
+		this.keys.forEach((key, index) => {
+			this.adminService.getKeyValue(key).subscribe((res: any) => {
+				console.log(res);
+				this.kvObjects[index] = res;
+				if (index == 1) {
+					this.settingsControls[index].setValue(
+						Number(this.kvObjects[index].value == res.value)
+					);
+				} else {
+					this.settingsControls[index].setValue(
+						this.kvObjects[index].value == res.value
+					);
+				}
+			});
 		});
 	}
-	settingsControls = [new FormControl('')];
-	kvObjects: any = [{ id: 0, key: '', value: '' }];
-	loading: boolean[] = [false];
 
 	saveWartung() {
 		this.kvObjects[0].value = this.settingsControls[0].value
@@ -37,7 +48,28 @@ export class SettingsComponent implements OnInit {
 			});
 	}
 
+	saveMaxLentDate() {
+		this.kvObjects[1].value = this.daysToSeconds(
+			this.settingsControls[1].value
+		);
+		this.loading[1] = true;
+		this.adminService
+			.setKeyValue(this.kvObjects[1])
+			.subscribe((res: any) => {
+				this.loading[1] = false;
+				this.settingsControls[1].setValue(
+					this.secondsToDays(res.value)
+				);
+			});
+	}
+
 	backToHome() {
 		this.router.navigate(['admin']);
+	}
+	daysToSeconds(days: any) {
+		return Number(days) * 24 * 60 * 60;
+	}
+	secondsToDays(seconds: any) {
+		return Number(seconds) / 60 / 60 / 24;
 	}
 }
