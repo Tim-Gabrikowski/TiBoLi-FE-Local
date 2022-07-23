@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TransactionsService } from '../services/transactions.service';
 
 @Component({
-	selector: 'app-back',
+	selector: 'app-transations-back',
 	templateUrl: './back.component.html',
 	styleUrls: ['./back.component.css'],
 })
@@ -17,7 +17,7 @@ export class BackComponent implements OnInit {
 
 	back(mNumber: string) {
 		this.transactionsService.finnishTransaction(Number(mNumber), () => {
-			this.router.navigate(['/transactions/back']);
+			this.router.navigate(['/transactions/']);
 		});
 	}
 }

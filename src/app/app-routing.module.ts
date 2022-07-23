@@ -19,6 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminUserListComponent } from './admin/user-list/user-list.component';
 import { AdminUserDetailComponent } from './admin/user-detail/user-detail.component';
 import { SettingsComponent } from './admin/settings/settings.component';
+import { ExtendComponent } from './transactions/extend/extend.component';
 
 const routes: Routes = [
 	{
@@ -66,14 +67,8 @@ const routes: Routes = [
 		data: { perm_group: 3 },
 	},
 	{
-		path: 'transactions/lent/:random',
-		component: LentComponent,
-		canActivate: [AuthGuard],
-		data: { perm_group: 3 },
-	},
-	{
-		path: 'transactions/back',
-		component: BackComponent,
+		path: 'transactions/:random',
+		component: TransactionsComponent,
 		canActivate: [AuthGuard],
 		data: { perm_group: 3 },
 	},

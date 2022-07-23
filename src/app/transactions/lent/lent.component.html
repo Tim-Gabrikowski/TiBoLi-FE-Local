@@ -1,16 +1,4 @@
-<div class="headBar">
-	<button
-		mat-icon-button
-		aria-label="Example icon button with a vertical three dot icon"
-		routerLink="/transactions"
-	>
-		<mat-icon>arrow_back_ios</mat-icon>
-	</button>
-	<span class="font-a">Ausleihen</span>
-	<mat-divider></mat-divider>
-</div>
-
-<mat-stepper>
+<mat-stepper orientation="vertical">
 	<mat-step>
 		<ng-template matStepLabel>Benutzer auswählen</ng-template>
 		<mat-form-field appearance="fill">
@@ -46,8 +34,8 @@
 	</mat-step>
 	<mat-step>
 		<ng-template matStepLabel>Angaben prüfen</ng-template>
-		User: {{ bNumber }} <br />
-		Books: <br />
+		Schüler*in: {{ bNumber }} <br />
+		ausgewählte Bücher: <br />
 		<div *ngFor="let book of books">
 			{{ book.mNumber }} -
 			<button mat-button (click)="removeBook(book.mNumber)">
@@ -66,7 +54,11 @@
 		Books: <br />
 		<div *ngFor="let book of books">
 			{{ book.mNumber }} - {{ book.status | transactionStatus }}
+			<span *ngIf="book.status == 0">
+				(Frist: {{ book.transaction!.maxBack | unixToDateString }})
+			</span>
 		</div>
+
 		<br />
 		<button mat-button (click)="reload()">Beenden</button>
 	</mat-step>

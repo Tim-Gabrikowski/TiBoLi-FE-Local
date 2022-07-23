@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ITransaction } from 'src/app/interfaces/transaction';
 import { TransactionsService } from '../services/transactions.service';
 
 interface Idata {
 	mNumber: number;
 	status: number;
+	transaction?: ITransaction;
 }
 
 @Component({
@@ -42,17 +44,18 @@ export class LentComponent implements OnInit {
 		this.transactionsService.newTransactions(
 			this.bNumber,
 			this.mNumbers,
-			(num: number, status: number) => {
+			(num: number, status: number, transaction: any) => {
 				this.books.forEach((element) => {
 					if (element.mNumber == num) {
 						element.status = status;
+						element.transaction = transaction;
 					}
 				});
 			}
 		);
 	}
 	reload() {
-		this.router.navigate(['/transactions/lent/', this.makeid()]);
+		this.router.navigate(['/transactions/', this.makeid()]);
 	}
 	makeid() {
 		var text = '';

@@ -3,6 +3,9 @@
 	<input matInput placeholder="z.b. 111111111" #mNumberInput />
 </mat-form-field>
 <br />
-<button mat-button (click)="back(mNumberInput.value); mNumberInput.value = ''">
-	Zurrückgeben
+<button
+	mat-button
+	(click)="extend(mNumberInput.value); mNumberInput.value = ''"
+>
+	Verlängern
 </button>

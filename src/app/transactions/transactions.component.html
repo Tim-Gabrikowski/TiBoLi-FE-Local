@@ -12,30 +12,20 @@
 <div class="content">
 	<mat-card>
 		<mat-card-title>Ausleihen</mat-card-title>
-		<mat-card-footer>
-			<nav>
-				<button
-					mat-flat-button
-					color="accent"
-					routerLink="/transactions/lent/1"
-				>
-					Öffnen
-				</button>
-			</nav>
-		</mat-card-footer>
+		<mat-card-content>
+			<app-transactions-lent></app-transactions-lent>
+		</mat-card-content>
+	</mat-card>
+	<mat-card>
+		<mat-card-title>Verlängern</mat-card-title>
+		<mat-card-content>
+			<app-transactions-extend></app-transactions-extend>
+		</mat-card-content>
 	</mat-card>
 	<mat-card>
 		<mat-card-title>Zurrückgeben</mat-card-title>
-		<mat-card-footer>
-			<nav>
-				<button
-					mat-flat-button
-					color="accent"
-					routerLink="/transactions/back"
-				>
-					Öffnen
-				</button>
-			</nav>
-		</mat-card-footer>
+		<mat-card-content>
+			<app-transations-back></app-transations-back>
+		</mat-card-content>
 	</mat-card>
 </div>

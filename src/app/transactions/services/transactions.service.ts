@@ -49,7 +49,7 @@ export class TransactionsService {
 				} else {
 					this.log('Buch ' + num + ' konnte nicht geliehen werden');
 				}
-				callback(num, res.status);
+				callback(num, res.status, res.transaction);
 			});
 		});
 	}
@@ -64,9 +64,8 @@ export class TransactionsService {
 
 		req.subscribe((res) => {
 			if (res.status == 0) {
-				this.log(
-					'Buch ' + mNumber + ' ist jetzt nicht mehr ausgeliehen.'
-				);
+				var late = res.late ? 'verspätet ' : '';
+				this.log('Buch ' + mNumber + ' ist ' + late + 'abgegeben');
 			}
 			callback();
 		});
@@ -96,6 +95,15 @@ export class TransactionsService {
 					)
 				)
 			);
+	}
+	extendTransaction(mNum: number) {
+		return this.http
+			.put(
+				this.transactionsUrl + '/extend',
+				{ mNumber: mNum },
+				this.httpOptions
+			)
+			.pipe(catchError(this.handleError('extendTransaction')));
 	}
 
 	//error Handling

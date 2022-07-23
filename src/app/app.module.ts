@@ -42,6 +42,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { authInterceptorProviders } from './auth/auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.module';
+import { PipesModuleModule } from './pipes-module/pipes-module.module';
+import { ExtendComponent } from './transactions/extend/extend.component';
 
 @NgModule({
 	declarations: [
@@ -60,6 +62,7 @@ import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.mod
 		DatePipe,
 		FormatDatePipe,
 		TransactionStatusPipe,
+		ExtendComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -88,6 +91,7 @@ import { PermGroupPipeModule } from './pipes/perm-group-pipe/perm-group-pipe.mod
 		MatExpansionModule,
 		MatProgressBarModule,
 		PermGroupPipeModule,
+		PipesModuleModule,
 	],
 	providers: [authInterceptorProviders],
 	bootstrap: [AppComponent],

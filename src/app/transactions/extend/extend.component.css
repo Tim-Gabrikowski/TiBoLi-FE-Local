@@ -1,8 +1,6 @@
 .font-a {
 	font-size: 20px;
 }
-mat-card {
-	width: 300px;
+mat-form-field {
 	margin: 20px;
-	float: left;
 }
